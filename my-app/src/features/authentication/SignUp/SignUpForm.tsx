@@ -1,4 +1,3 @@
-import React from "react";
 import Field from "@/Shared/Components/Field/Field";
 import { useSignUpForm } from "./useSignUpForm";
 

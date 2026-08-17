@@ -1,4 +1,3 @@
-import React from "react";
 import OtpForm from "./OtpForm";
 import { useOtpForm } from "./useOtpForm";
 

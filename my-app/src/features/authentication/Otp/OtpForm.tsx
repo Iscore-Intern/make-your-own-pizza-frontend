@@ -1,4 +1,3 @@
-import React from "react";
 import { useOtpForm } from "./useOtpForm";
 
 type OtpFormUIProps = ReturnType<typeof useOtpForm>;
