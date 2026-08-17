@@ -1,36 +1,29 @@
+import React from "react";
 import { useLoginForm } from "./useLoginForm";
-import Input from "@/Shared/Components/Field/Field";
-export default function LoginForm() {
-    const { formik } = useLoginForm();
+import Field from "@/Shared/Components/Field/Field";
+
+// Automatically extract the exact type of 'formik' from the hook
+interface LoginFormUIProps {
+    formik: ReturnType<typeof useLoginForm>['formik'];
+}
+
+export default function LoginForm({ formik }: LoginFormUIProps) {
     return (
         <div>
             <h2>Login Page</h2>
             <form onSubmit={formik.handleSubmit}>
-
-                <Input
-                    label="Email"
-                    type="email"
-                    name="email"
-                    value={formik.values.email}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    error={formik.errors.email as string}
-                    touched={formik.touched.email as boolean}
+                <Field
+                    label="Email" type="email" name="email"
+                    value={formik.values.email} onChange={formik.handleChange} onBlur={formik.handleBlur}
+                    error={formik.errors.email as string} touched={formik.touched.email as boolean}
                     readonly={false}
                 />
-
-                <Input
-                    label="Password"
-                    type="password"
-                    name="password"
-                    value={formik.values.password}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    error={formik.errors.password as string}
-                    touched={formik.touched.password as boolean}
+                <Field
+                    label="Password" type="password" name="password"
+                    value={formik.values.password} onChange={formik.handleChange} onBlur={formik.handleBlur}
+                    error={formik.errors.password as string} touched={formik.touched.password as boolean}
                     readonly={false}
                 />
-
                 <button type="submit" disabled={formik.isSubmitting}>
                     {formik.isSubmitting ? 'Submitting...' : 'Login'}
                 </button>

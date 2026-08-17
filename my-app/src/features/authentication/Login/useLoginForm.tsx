@@ -1,27 +1,23 @@
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
-import { loginSchema } from "../../schemas/validationSchemas";
-import axiosInstance from "../../api/axiosConfig";
+import { loginSchema } from "../../../Core/Validation/Login.Validation"
+import axiosInstance from "../../../Shared/Interceptors/authentication.interceptor";
 import toast from 'react-hot-toast';
 
 export const useLoginForm = () => {
     const navigate = useNavigate();
-    
+
     const formik = useFormik({
-        initialValues: {
-            email: '',
-            password: '',
-        },
+        initialValues: { email: '', password: '' },
         validationSchema: loginSchema,
         onSubmit: async (values, { setSubmitting, setFieldError }) => {
             try {
                 const response = await axiosInstance.post('/Auth/login', values);
-                const token = response.data.accessToken; 
-                
+                const token = response.data.accessToken;
                 if (token) {
                     localStorage.setItem('token', token);
                     toast.success("Welcome Back!");
-                    navigate('/home'); 
+                    navigate('/home');
                 } else {
                     toast.error("Something Went Wrong, Please Try Again!");
                 }
@@ -33,5 +29,6 @@ export const useLoginForm = () => {
             }
         }
     });
+
     return { formik };
 };
