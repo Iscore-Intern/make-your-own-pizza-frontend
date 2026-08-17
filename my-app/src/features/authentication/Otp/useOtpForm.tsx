@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import axiosInstance from "../../../Shared/Interceptors/authentication.interceptor";
+import axiosInstance from "../../../Shared/Interceptors/Authentication.Interceptor";
 import axios from "axios";
 
 interface UseOtpFormProps {

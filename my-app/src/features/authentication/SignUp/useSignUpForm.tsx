@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import { signUpSchema } from "../../../Core/Validation/Signup.Validation";
-import axiosInstance from "@/Shared/Interceptors/authentication.interceptor";
+import axiosInstance from "@/Shared/Interceptors/Authentication.Interceptor";
 import axios from "axios";
 import toast from "react-hot-toast";
 
