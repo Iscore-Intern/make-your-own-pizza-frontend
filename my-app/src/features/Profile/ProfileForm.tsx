@@ -1,5 +1,5 @@
-import Field from "../../../Shared/Components/Field/Field"
-import { useProfileForm } from "./useProfileForm"
+import Field from "../../Shared/Components/Field/Field"
+import { useProfileForm } from "@/Core/Hooks/useProfileForm.Hook";
 interface ProfileFormUIProps {
     formik: ReturnType<typeof useProfileForm>['formik'];
     isEditing: boolean;
