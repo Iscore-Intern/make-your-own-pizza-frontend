@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Order } from "./orders";
-import axiosInstance from '@/Core/Interceptors/authentication.interceptor';
+import axiosInstance from "@/Core/Interceptors/Authentication.Interceptors";
 import axios from "axios";
 import toast from "react-hot-toast";
 

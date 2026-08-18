@@ -1,11 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { loginSchema } from "../../../Core/Validation/Login.Validation"
-<<<<<<< HEAD
-import axiosInstance from "@/Core/Interceptors/authentication.interceptor";
-=======
-import axiosInstance from "../../../Core/Interceptors/Authentication.Interceptor";
->>>>>>> 7f073fb4c3647eca00b04398d9c0512f212f245f
+import axiosInstance from "@/Core/Interceptors/Authentication.Interceptors";
 import toast from 'react-hot-toast';
 import axios from "axios";
 
