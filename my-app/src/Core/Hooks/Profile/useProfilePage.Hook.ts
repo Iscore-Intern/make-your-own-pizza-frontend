@@ -21,11 +21,17 @@ export default function useProfilePage() {
     const [isLoading, setIsLoading] = useState(true);
     const [isEditing, setIsEditing] = useState(false);
 
-    const { formik } = useProfileForm({
-        firstName: profile.firstName,
-        lastName: profile.lastName,
-        phone: profile.phone,
-    });
+    const { formik } = useProfileForm(
+        {
+            firstName: profile.firstName,
+            lastName: profile.lastName,
+            phone: profile.phone,
+        },
+        (data) => {
+            setProfile(data);
+            setIsEditing(false);
+        }
+    );
 
     useEffect(() => {
         const loadProfile = async () => {
@@ -53,5 +59,7 @@ export default function useProfilePage() {
         setIsEditing(false);
     };
 
-    return { profile, isLoading, isEditing, formik, onEdit, onCancel };
+    const onSaveAddress = (data: UserData) => setProfile(data);
+
+    return { profile, isLoading, isEditing, formik, onEdit, onCancel, onSaveAddress };
 }
