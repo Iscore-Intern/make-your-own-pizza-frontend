@@ -1,4 +1,4 @@
-import axiosInstance from "@/Core/Interceptors/Authentication.Interceptor";
+import axiosInstance from "@/Core/Interceptors/Authentication.Interceptors";
 import type UserData from "@/Core/Interfaces/Profile/UserData.Interface";
 
 export default async function FetchUserProfile() : Promise<UserData> {

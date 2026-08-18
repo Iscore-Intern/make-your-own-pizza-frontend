@@ -1,4 +1,4 @@
-import axiosInstance from "@/Core/Interceptors/Authentication.Interceptor";
+import axiosInstance from "@/Core/Interceptors/Authentication.Interceptors";
 import type UserData from "@/Core/Interfaces/Profile/UserData.Interface";
 import type UpdateProfileValues from "@/Core/Interfaces/Profile/UpdateProfileValues.Interface";
 import toast from 'react-hot-toast';
