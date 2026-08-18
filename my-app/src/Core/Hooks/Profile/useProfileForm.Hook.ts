@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
-import { profileSchema } from "../Validation/Profile.Validation";
-import type UpdateProfileValues from "../Interfaces/Profile/UpdateProfileValues.Interface";
-import UpdateUserProfile from "../APIs/Profile/UpdateUserProfile.API";
+import { profileSchema } from "../../Validation/Profile.Validation";
+import type UpdateProfileValues from "../../Interfaces/Profile/UpdateProfileValues.Interface";
+import UpdateUserProfile from "../../APIs/Profile/UpdateUserProfile.API";
 
 
 export default function useProfileForm(initialValues: UpdateProfileValues) {

@@ -1,4 +1,4 @@
-import useProfileForm from "@/Core/Hooks/useProfileForm.Hook";
+import useProfileForm from "@/Core/Hooks/Profile/useProfileForm.Hook";
 
 export default interface ProfileFormValues {
     formik: ReturnType<typeof useProfileForm>['formik'];

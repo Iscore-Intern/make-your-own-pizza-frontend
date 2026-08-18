@@ -5,8 +5,8 @@ import toast from 'react-hot-toast';
 
 export default async function UpdateUserProfile(updatedProfileData: UpdateProfileValues): Promise<UserData> {
     try {
-        const response = await axiosInstance.patch<UserData>(
-            '/Profile',
+        const response = await axiosInstance.put<UserData>(
+            '/User/me',
             updatedProfileData);
             toast.success("Profile Updated Successfully!");
             return response.data;
