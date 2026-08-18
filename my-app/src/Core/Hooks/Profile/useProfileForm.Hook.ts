@@ -1,16 +1,18 @@
 import { useFormik } from "formik";
 import { profileSchema } from "../../Validation/Profile.Validation";
 import type UpdateProfileValues from "../../Interfaces/Profile/UpdateProfileValues.Interface";
+import type UserData from "../../Interfaces/Profile/UserData.Interface";
 import UpdateUserProfile from "../../APIs/Profile/UpdateUserProfile.API";
 
 
-export default function useProfileForm(initialValues: UpdateProfileValues) {
+export default function useProfileForm(initialValues: UpdateProfileValues, onSuccess?: (data: UserData) => void) {
     const formik = useFormik<UpdateProfileValues>({
         initialValues,
         validationSchema: profileSchema,
         onSubmit: async (values, { setSubmitting }) => {
             try{
-                await UpdateUserProfile(values); // Fetch the user profile before updating
+                const data = await UpdateUserProfile(values);
+                onSuccess?.(data);
             }
             finally{
             setSubmitting(false);
