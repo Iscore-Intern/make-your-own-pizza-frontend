@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { loginSchema } from "../../../Core/Validation/Login.Validation"
-import axiosInstance from "@/Shared/Interceptors/authentication.interceptor";
+import axiosInstance from "@/Core/Interceptors/authentication.interceptor";
 import toast from 'react-hot-toast';
+import axios from "axios";
 
 export const useLoginForm = () => {
     const navigate = useNavigate();
@@ -22,8 +23,17 @@ export const useLoginForm = () => {
                     toast.error("Something Went Wrong, Please Try Again!");
                 }
             } catch (error) {
-                console.error("Error logging in:", error);
-                setFieldError('email', 'Wrong Email or Password');
+                if (axios.isAxiosError(error)) {
+                    const backendMessage = error.response?.data?.message;
+                    if (backendMessage) {
+                        toast.error(backendMessage);
+                    } else {
+                        toast.error("Login failed, Please try again");
+                        setFieldError("email", "Login was unsuccessful, try again");
+                    }
+                } else {
+                    toast.error("An unexpected error occurred");
+                }
             } finally {
                 setSubmitting(false);
             }

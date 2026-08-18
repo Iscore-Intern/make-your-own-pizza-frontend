@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import axiosInstance from "../../../Shared/Interceptors/Authentication.Interceptor";
+import axiosInstance from "../../../Core/Interceptors/authentication.interceptor";
 import axios from "axios";
 
 interface UseOtpFormProps {
@@ -30,7 +30,7 @@ export const useOtpForm = ({ email, onVerifySuccess }: UseOtpFormProps) => {
         }
     };
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
         e.preventDefault();
         const finalOtpCode = otp.join('');
         if (finalOtpCode.length < 6) return alert("Please enter the full 6-digit code.");

@@ -1,7 +1,5 @@
 import { useLoginForm } from "./useLoginForm";
 import Field from "@/Shared/Components/Field/Field";
-
-// Automatically extract the exact type of 'formik' from the hook
 interface LoginFormUIProps {
     formik: ReturnType<typeof useLoginForm>['formik'];
 }
