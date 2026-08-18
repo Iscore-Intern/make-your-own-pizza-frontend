@@ -4,7 +4,7 @@ import type UpdateProfileValues from "../Interfaces/Profile/UpdateProfileValues.
 import UpdateUserProfile from "../APIs/Profile/UpdateUserProfile.API";
 
 
-export const useProfileForm = (initialValues: UpdateProfileValues) => {
+export default function useProfileForm(initialValues: UpdateProfileValues) {
     const formik = useFormik<UpdateProfileValues>({
         initialValues,
         validationSchema: profileSchema,

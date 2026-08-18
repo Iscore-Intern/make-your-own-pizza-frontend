@@ -1,13 +1,7 @@
 import Field from "../../Shared/Components/Field/Field"
-import { useProfileForm } from "@/Core/Hooks/useProfileForm.Hook";
-interface ProfileFormUIProps {
-    formik: ReturnType<typeof useProfileForm>['formik'];
-    isEditing: boolean;
-    onEdit: () => void;
-    onCancel: () => void;
-}
+import type ProfileFormValues from "@/Core/Interfaces/Profile/ProfleForm.Interface";
 
-export default function ProfileForm({ formik, isEditing, onEdit, onCancel }: ProfileFormUIProps) {
+export default function ProfileForm({ formik, isEditing, onEdit, onCancel, email }: ProfileFormValues) {
     return (
         <form className="profile-form" onSubmit={formik.handleSubmit}>
             <div className="profile-section">
@@ -46,7 +40,7 @@ export default function ProfileForm({ formik, isEditing, onEdit, onCancel }: Pro
                         label="Email"
                         type="email"
                         name="email"
-                        value={formik.values.email}
+                        value={email}
                         readonly={true}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
