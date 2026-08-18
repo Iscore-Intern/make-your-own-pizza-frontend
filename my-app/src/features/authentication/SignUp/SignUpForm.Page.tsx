@@ -1,4 +1,3 @@
-import React from "react";
 import SignUpForm from "./SignUpForm";
 import { useSignUpForm } from "./useSignUpForm";
 
