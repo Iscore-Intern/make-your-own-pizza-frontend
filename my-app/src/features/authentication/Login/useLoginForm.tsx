@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { loginSchema } from "../../../Core/Validation/Login.Validation"
-import axiosInstance from "../../../Shared/Interceptors/Authentication.Interceptor";
+import axiosInstance from "@/Shared/Interceptors/authentication.interceptor";
 import toast from 'react-hot-toast';
 
 export const useLoginForm = () => {
