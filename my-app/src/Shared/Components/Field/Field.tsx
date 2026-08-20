@@ -10,6 +10,7 @@ interface InputFieldProps {
     onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
     error?: string;
     touched?: boolean;
+    className?: string;
 }
 
 export default function Field({
@@ -22,10 +23,13 @@ export default function Field({
     error,
     touched,
     readonly,
+    className
 }: InputFieldProps) {
     return (
         <div>
-            <label>{label}</label>
+            <label className="text-sm font-bold text-amber-950 mb-1 block">
+                {label}
+            </label>
             <input
                 type={type}
                 name={name}
@@ -33,6 +37,15 @@ export default function Field({
                 onChange={onChange}
                 onBlur={onBlur}
                 readOnly={readonly}
+                className={`
+                    w-full px-4 py-3 rounded-xl 
+                    border border-beige-dark border-2 
+                    bg-beige-color text-beige-dark placeholder-beige-dark
+                    focus:outline-none focus:border-black-font border-r-4 border-b-4 border-l-1 border-t-1  
+                    transition-all duration-200
+                    ${error ? 'border-red-color' : null}
+                    ${className}
+                `}
             />
             {touched && error ? (
                 <div style={{ color: 'red' }}>{error}</div>
