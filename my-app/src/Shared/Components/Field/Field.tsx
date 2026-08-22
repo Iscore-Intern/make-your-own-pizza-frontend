@@ -43,7 +43,6 @@ export default function Field({
                     bg-beige-color text-beige-dark placeholder-beige-dark
                     focus:outline-none focus:border-black-font border-r-4 border-b-4 border-l-1 border-t-1  
                     transition-all duration-200
-                    ${error ? 'border-red-color' : null}
                     ${className}
                 `}
             />

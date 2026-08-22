@@ -11,7 +11,7 @@ export const useLoginForm = () => {
     const formik = useFormik({
         initialValues: { email: '', password: '' },
         validationSchema: loginSchema,
-        onSubmit: async (values, { setSubmitting, setFieldError }) => {
+        onSubmit: async (values, { setSubmitting}) => {
             try {
                 const response = await axiosInstance.post('/Auth/login', values);
                 const token = response.data.accessToken;
@@ -29,7 +29,6 @@ export const useLoginForm = () => {
                         toast.error(backendMessage);
                     } else {
                         toast.error("Login failed, Please try again");
-                        setFieldError("email", "Login was unsuccessful, try again");
                     }
                 } else {
                     toast.error("An unexpected error occurred");

@@ -12,7 +12,7 @@ export const useSignUpForm = ({ onSignUpSuccess }: UseSignUpFormProps) => {
     const formik = useFormik({
         initialValues: { firstName: '', lastName: '', email: '', password: '', confirmPassword: '', phone: '', role: 2 },
         validationSchema: signUpSchema,
-        onSubmit: async (values, { setSubmitting, setFieldError }) => {
+        onSubmit: async (values, { setSubmitting }) => {
             try {
                 await axiosInstance.post('/Auth/register', values);
                 onSignUpSuccess(values.email);
@@ -23,7 +23,6 @@ export const useSignUpForm = ({ onSignUpSuccess }: UseSignUpFormProps) => {
                         toast.error(backendMessage);
                     } else {
                         toast.error("SignUp failed, Please try again");
-                        setFieldError("email", "Signup was unsuccessful, try again");
                     }
                 } else {
                     toast.error("An unexpected error occurred");
