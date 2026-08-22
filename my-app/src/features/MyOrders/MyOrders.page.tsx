@@ -4,5 +4,8 @@ import { useMyOrders } from "./useMyOrders";
 export default function MyOrdersPage() {
     const myOrdersLogic = useMyOrders();
     
-    return <MyOrders {...myOrdersLogic} />;
+    return (
+
+        <MyOrders {...myOrdersLogic} />
+    )
 }

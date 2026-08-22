@@ -2,6 +2,7 @@
 
 @theme{
     --color-red-color:#FF3D1F;
+    --color-red-fade:#ff3d1f8e;
     --color-white-color: #ffffff;
     --color-black-font: #1A1A1A;
     --color-sub-color:#9F9C99;
@@ -13,4 +14,9 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
   -webkit-box-shadow: 0 0 0px 1000px #FFF8F4 inset !important; 
   -webkit-text-fill-color: #232c33 !important; 
+}
+
+body {
+  background-color: #FFF8F4;
+  margin: 0;
 }

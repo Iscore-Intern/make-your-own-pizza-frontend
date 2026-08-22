@@ -8,6 +8,7 @@ export default function App() {
     return (
         <BrowserRouter>
             <Routes>
+                <Route path="/orders" element={<MyOrdersPage />} />
                 <Route path="/" element={<AuthenticationPage />} />
                 <Route element={<ProtectedRoute />}>
                     <Route path="/orders" element={<MyOrdersPage />} />
