@@ -10,6 +10,7 @@ export default function App() {
             <Routes>
                 <Route path="/orders" element={<MyOrdersPage />} />
                 <Route path="/" element={<AuthenticationPage />} />
+                <Route path="/profile" element={<ProfilePage />} />
                 <Route element={<ProtectedRoute />}>
                     <Route path="/orders" element={<MyOrdersPage />} />
                     <Route path="/profile" element={<ProfilePage />} />

@@ -37,12 +37,14 @@ export default function Field({
                 onChange={onChange}
                 onBlur={onBlur}
                 readOnly={readonly}
+                tabIndex={readonly ? -1 : undefined}
                 className={`
-                    w-full px-4 py-3 rounded-xl 
-                    border border-beige-dark border-2 
+                    w-full px-4 py-3 rounded-xl
+                    border border-beige-dark border-2
                     bg-beige-color text-beige-dark placeholder-beige-dark
-                    focus:outline-none focus:border-black-font border-r-4 border-b-4 border-l-1 border-t-1  
+                    focus:outline-none border-r-4 border-b-4 border-l-1 border-t-1
                     transition-all duration-200
+                    ${readonly ? 'select-none cursor-default' : 'focus:border-black-font cursor-text'}
                     ${className}
                 `}
             />
