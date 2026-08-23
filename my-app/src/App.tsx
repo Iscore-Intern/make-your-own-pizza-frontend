@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import AuthenticationPage from './features/authentication/Authentication.page';
+import AuthenticationPage from './Features/Authentication/Authentication.page';
 import ProtectedRoute from './Core/ProtectedRoute';
-import MyOrdersPage from './features/MyOrders/MyOrders.page';
-import ProfilePage from './features/Profile/Profile.Page';
+import MyOrdersPage from './Features/MyOrders/MyOrders.page';
+import ProfilePage from './Features/Profile/Profile.Page';
 
 export default function App() {
     return (

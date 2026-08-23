@@ -5,8 +5,8 @@ export default function AddressForm({ formik, onCancel, onDelete }: AddressFormP
     return (
         <div className="address-modal-overlay">
             <div className="address-modal">
-                <form className="address-form" onSubmit={formik.handleSubmit}>
-                    <h3 className="address-section-title">Edit Address</h3>
+                <form onSubmit={formik.handleSubmit}>
+                    <h3 className="profile-section-title address-modal-title">Edit Address</h3>
 
                     <div className="info-grid">
                         <Field
@@ -78,13 +78,13 @@ export default function AddressForm({ formik, onCancel, onDelete }: AddressFormP
                     </div>
 
                     <div className="btn-group-small">
-                        <button type="submit" disabled={formik.isSubmitting}>
+                        <button type="submit" className="btn-primary-small" disabled={formik.isSubmitting}>
                             {formik.isSubmitting ? "Saving..." : "Save"}
                         </button>
-                        <button type="button" onClick={onCancel} disabled={formik.isSubmitting}>
+                        <button type="button" className="btn-outline-small" onClick={onCancel} disabled={formik.isSubmitting}>
                             Cancel
                         </button>
-                        <button type="button" onClick={onDelete} disabled={formik.isSubmitting}>
+                        <button type="button" className="btn-danger-small" onClick={onDelete} disabled={formik.isSubmitting}>
                             Delete
                         </button>
                     </div>

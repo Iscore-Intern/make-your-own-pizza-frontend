@@ -9,10 +9,9 @@ export default function ProfileHeader({ firstName, lastName, email }: headerFiel
     const initials = `${firstName[0] ?? ""}${lastName[0] ?? ""}`.toUpperCase()
 
     return (
-        <div className="profile-intro">
-            <header className="profile-identity">
+        <header className="profile-identity">
 
-                <div className="pizza-avatar ">
+                <div className="pizza-avatar">
                     <div className="pizza-ring pizza-ring--1"></div>
                     <div className="pizza-ring pizza-ring--2"></div>
                     <div className="pizza-ring pizza-ring--3"></div>
@@ -23,13 +22,10 @@ export default function ProfileHeader({ firstName, lastName, email }: headerFiel
                     <div className="topping t-4"></div>
                     <span className="pizza-avatar-initials">{initials}</span>
                 </div>
-
-                <div className="profile-data">
-                    <h2>{firstName} {lastName}</h2>
-                    <p>{email}</p>
-                </div>
-
-            </header>
-        </div>
+            <div className="profile-data">
+                <h2>{firstName} {lastName}</h2>
+                <p>{email}</p>
+            </div>
+        </header>
     )
 }
