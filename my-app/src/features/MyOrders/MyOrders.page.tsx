@@ -5,7 +5,6 @@ export default function MyOrdersPage() {
     const myOrdersLogic = useMyOrders();
     
     return (
-
-        <MyOrders {...myOrdersLogic} />
+            <MyOrders {...myOrdersLogic} />
     )
 }

@@ -3,11 +3,12 @@ import AuthenticationPage from './features/authentication/Authentication.page';
 import ProtectedRoute from './Core/ProtectedRoute';
 import MyOrdersPage from './features/MyOrders/MyOrders.page';
 import ProfilePage from './features/Profile/Profile.Page';
-
+import OrderDetailsPage from './features/OrderDetails/OrderDetails.page';
 export default function App() {
     return (
         <BrowserRouter>
             <Routes>
+                <Route path="/singleOrder" element={<OrderDetailsPage />} />
                 <Route path="/orders" element={<MyOrdersPage />} />
                 <Route path="/" element={<AuthenticationPage />} />
                 <Route element={<ProtectedRoute />}>
