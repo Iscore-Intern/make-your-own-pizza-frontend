@@ -1,0 +1,199 @@
+/* --- إعدادات الحاوية الرئيسية (نفس فكرة التوسيط والمسافات في البروجكت) --- */
+.cart-page-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 32px 20px;
+}
+
+/* --- الهيدر (العنوان وزرار الرجوع) --- */
+.cart-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+}
+
+.cart-header button {
+  font-size: 14px;
+  padding: 5px 12px;
+  border-radius: 5px;
+  color: var(--accent);
+  background: var(--accent-bg);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.cart-header button:hover {
+  border-color: var(--accent-border);
+}
+
+/* --- كروت المنتجات (البيتزا هتتصغر هنا!) --- */
+.cart-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cart-item-card {
+  display: flex;
+  gap: 20px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  align-items: center;
+  background-color: var(--social-bg); /* لون خلفية خفيف لو موجود في الـ Theme */
+}
+
+/* هنا حل مشكلة الصورة العملاقة */
+.item-image-container img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.item-details {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.item-details h3 {
+  margin: 0;
+  color: var(--text-h);
+}
+
+.item-description {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+/* --- زراير التحكم في الكمية --- */
+.item-quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.item-quantity-controls button {
+  background: var(--accent-bg);
+  color: var(--accent);
+  border: 1px solid transparent;
+  border-radius: 4px;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.item-quantity-controls button:hover {
+  border-color: var(--accent-border);
+}
+
+.item-price-action {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.item-price {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.remove-btn {
+  background: transparent;
+  color: #dc3545; /* لون أحمر للحذف */
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: underline;
+}
+
+/* --- صندوق الملاحظات --- */
+.special-request-section,
+.payment-summary-section {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.request-textarea {
+  width: 100%;
+  margin-top: 12px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: inherit;
+  resize: vertical;
+  box-sizing: border-box;
+  background: transparent;
+}
+
+.request-textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* --- ملخص الدفع --- */
+.payment-summary-container h3 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  color: var(--text-h);
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 15px;
+}
+
+.total-row {
+  font-size: 18px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.checkout-btn {
+  width: 100%;
+  margin-top: 24px;
+  font-size: 16px;
+  padding: 12px;
+  border-radius: 6px;
+  color: white;
+  background: var(--accent);
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: opacity 0.3s;
+}
+
+.checkout-btn:hover {
+  opacity: 0.9;
+}
+
+/* --- ريسبونسيف للموبايل --- */
+@media (max-width: 1024px) {
+  .cart-item-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .item-price-action {
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
