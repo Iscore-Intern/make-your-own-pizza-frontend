@@ -1,4 +1,3 @@
-/* --- إعدادات الحاوية الرئيسية (نفس فكرة التوسيط والمسافات في البروجكت) --- */
 .cart-page-container {
   display: flex;
   flex-direction: column;
@@ -8,7 +7,6 @@
   padding: 32px 20px;
 }
 
-/* --- الهيدر (العنوان وزرار الرجوع) --- */
 .cart-header {
   display: flex;
   align-items: center;
@@ -32,7 +30,6 @@
   border-color: var(--accent-border);
 }
 
-/* --- كروت المنتجات (البيتزا هتتصغر هنا!) --- */
 .cart-items-list {
   display: flex;
   flex-direction: column;
@@ -46,10 +43,8 @@
   border: 1px solid var(--border);
   border-radius: 8px;
   align-items: center;
-  background-color: var(--social-bg); /* لون خلفية خفيف لو موجود في الـ Theme */
-}
+  background-color: var(--social-bg); }
 
-/* هنا حل مشكلة الصورة العملاقة */
 .item-image-container img {
   width: 100px;
   height: 100px;
@@ -75,7 +70,6 @@
   opacity: 0.7;
 }
 
-/* --- زراير التحكم في الكمية --- */
 .item-quantity-controls {
   display: flex;
   align-items: center;
@@ -112,14 +106,13 @@
 
 .remove-btn {
   background: transparent;
-  color: #dc3545; /* لون أحمر للحذف */
+  color: #dc3545; 
   border: none;
   cursor: pointer;
   font-size: 14px;
   text-decoration: underline;
 }
 
-/* --- صندوق الملاحظات --- */
 .special-request-section,
 .payment-summary-section {
   border: 1px solid var(--border);
@@ -144,7 +137,6 @@
   outline-offset: 2px;
 }
 
-/* --- ملخص الدفع --- */
 .payment-summary-container h3 {
   margin-top: 0;
   margin-bottom: 16px;
@@ -183,7 +175,6 @@
   opacity: 0.9;
 }
 
-/* --- ريسبونسيف للموبايل --- */
 @media (max-width: 1024px) {
   .cart-item-card {
     flex-direction: column;
