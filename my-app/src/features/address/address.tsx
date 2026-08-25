@@ -1,4 +1,3 @@
-import "./address.css";
 import AddressForm from "./AddressForm";
 import useAddress from "@/Core/Hooks/Address/useAddress.Hook";
 import type AddressValues from "@/Core/Interfaces/Address/AddressValues.Interface";
@@ -15,30 +14,26 @@ export default function Address({ city, street, district, building_no, floor_no,
     const hasAddress = Boolean(city || street);
 
     return (
-        <div className="address-section">
-            <header className="address-section-header">
-                <h2>Your Address</h2>
-                {!hasAddress && <button className="add-btn" onClick={onEdit}>Add address</button>}
+        <section className="profile-section">
+            <header className="profile-section-header">
+                <h3 className="profile-section-title">Your Address</h3>
+                {!hasAddress && <button type="button" className="btn-outline-small" onClick={onEdit}>Add address</button>}
             </header>
-            <section className="address-section-details">
-                {hasAddress ? (
-                    <div className="address-box">
-                        <div className="address-list">
-                            <p>{city}, {street}</p>
-                            <p>District: {district}</p>
-                            <p>Building No: {building_no}</p>
-                            <p>Floor No: {floor_no}</p>
-                            <p>Apartment No: {apt_no}</p>
-                        </div>
 
-                        <div className="address-actions-btn">
-                            <button onClick={onEdit}>Edit</button>
-                        </div>
+            {hasAddress ? (
+                <div className="address-box">
+                    <div className="address-list">
+                        <p>{city}, {street}</p>
+                        <p>District: {district}</p>
+                        <p>Building No: {building_no}</p>
+                        <p>Floor No: {floor_no}</p>
+                        <p>Apartment No: {apt_no}</p>
                     </div>
-                ) : (
-                    <p>No address added yet.</p>
-                )}
-            </section>
+                    <button type="button" className="btn-outline-small" onClick={onEdit}>Edit</button>
+                </div>
+            ) : (
+                <p className="address-empty">No address added yet.</p>
+            )}
 
             {isModalOpen && (
                 <AddressForm
@@ -47,6 +42,6 @@ export default function Address({ city, street, district, building_no, floor_no,
                     onDelete={onDelete}
                 />
             )}
-        </div>
+        </section>
     )
 }

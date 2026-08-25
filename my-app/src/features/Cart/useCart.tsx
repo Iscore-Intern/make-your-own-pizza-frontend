@@ -2,7 +2,6 @@ import { useState } from 'react';
 import CartItemType from '../../Core/Interfaces/Cart/CartItem.Interface';
 
 export const useCart = () => {
-  // 1. حطينا الداتا الوهمية دي كقيمة مبدئية جوه الـ State علطول
   const [orders] = useState<CartItemType[]>([
     {
       orderId: '1',
@@ -24,7 +23,6 @@ export const useCart = () => {
 
   const [isLoading] = useState<boolean>(false);
 
-  // 2. هنرجع الـ orders للصفحة
   return {
     orders,
     isLoading

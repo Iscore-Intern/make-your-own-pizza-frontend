@@ -2,6 +2,7 @@
 
 @theme{
     --color-red-color:#FF3D1F;
+    --color-red-fade:#ff3d1f8e;
     --color-white-color: #ffffff;
     --color-black-font: #1A1A1A;
     --color-sub-color:#9F9C99;
@@ -13,4 +14,18 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
   -webkit-box-shadow: 0 0 0px 1000px #FFF8F4 inset !important; 
   -webkit-text-fill-color: #232c33 !important; 
+}
+
+.Page{
+  @apply flex min-h-screen items-center justify-center bg-white-color overflow-x-hidden p-4;
+  background-image: url(../BG.jpg);
+}
+
+.Information-Container{
+  @apply bg-white    rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] overflow-hidden w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 border-r-8 border-b-8 border-l-2 border-t-2 border-black;
+}
+
+body {
+  background-color: #FFF1E4;
+  margin: 0;
 }

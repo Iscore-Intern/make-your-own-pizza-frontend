@@ -1,4 +1,3 @@
-// متنساش تراجع مسار الـ Button الصح
 import Button from '../../Shared/Components/Button'; 
 
 export default function PaymentSummary() {

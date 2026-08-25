@@ -15,10 +15,10 @@ export default function Authentication({
 }: AuthenticationUIProps) {
     return (
         <div 
-        style={{backgroundImage:`url(./BG.jpg)`}}
-        className="auth-container flex min-h-screen items-center justify-center bg-white-color overflow-x-hidden p-4">
-            <div className="bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] overflow-hidden w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 border-r-8 border-b-8 border-l-2 border-t-2 border-black">
-                
+        style={{}}
+        className="Page">
+            <div className="Information-Container">
+
                 <div className="bg-red-color p-8 flex flex-col justify-between text-white-color relative">
                     <div className="flex flex-col items-center text-center mt-6">
                         <div className="w-20 h-20 bg-white rounded-2xl flex items-center justify-center shadow-md mb-4 ">
