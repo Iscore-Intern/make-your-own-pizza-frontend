@@ -3,7 +3,6 @@ import AuthenticationPage from './features/authentication/Authentication.page';
 import ProtectedRoute from './Core/ProtectedRoute';
 import MyOrdersPage from './features/MyOrders/MyOrders.page';
 import ProfilePage from './features/Profile/Profile.Page';
-
 export default function App() {
     return (
         <BrowserRouter>

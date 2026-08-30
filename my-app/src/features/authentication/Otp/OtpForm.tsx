@@ -8,8 +8,8 @@ export default function OtpForm({
     return (
         <form className="otp-form-container" onSubmit={handleSubmit}>
             <div className="full-width text-center">
-                <h2>Enter Verification Code</h2>
-                <p>We sent a 6-digit OTP to your mail</p>
+                <h2 className="text-2xl font-bold text-black-font mb-6 text-center">Enter Verification Code</h2>
+                <p className="texl-lg font-bold text-sub-color ">We sent a 6-digit OTP to your mail</p>
             </div>
             {fieldError && <p style={{ color: 'red', textAlign: 'center' }}>{fieldError}</p>}
 
