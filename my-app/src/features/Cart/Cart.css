@@ -27,7 +27,9 @@
 }
 
 .cart-header button:hover {
-  border-color: var(--accent-border);
+  color: var(--accent-hover);
+  background: rgb(202, 202, 202);
+
 }
 
 .cart-items-list {
@@ -187,4 +189,8 @@
     justify-content: space-between;
     width: 100%;
   }
+}
+
+.cart-item-footer-container {
+  @apply w-full mt-4
 }
