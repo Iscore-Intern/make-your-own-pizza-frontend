@@ -1,4 +1,4 @@
-export default interface DeliveryCardProps {
+export default interface DeliveryCard {
     CustomerName: string;
     CustomerPhone: string;
     CustomerAddress: string;
