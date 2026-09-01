@@ -1,8 +1,6 @@
 import CartItemType from '../../Core/Interfaces/Cart/CartItem.Interface';
+import CartItemProps from '../../Core/Interfaces/Cart/CartItemProps.Interface';
 
-interface CartItemProps {
-  itemDetails: CartItemType;
-}
 
 export default function CartItem({ itemDetails }: CartItemProps) {
   return (
@@ -13,7 +11,6 @@ export default function CartItem({ itemDetails }: CartItemProps) {
           <img src={itemDetails.orderPic} alt={itemDetails.name} className="w-20 h-20 object-cover rounded-xl shadow-sm" />
           <div className="flex flex-col gap-1">
             <p className="text-lg font-bold text-black-font">{itemDetails.name}</p>
-            <p className="text-xs font-semibold text-sub-color">{itemDetails.description}</p>
           </div>
         </div>
 
