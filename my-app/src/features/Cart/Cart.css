@@ -190,7 +190,3 @@
     width: 100%;
   }
 }
-
-.cart-item-footer-container {
-  @apply w-full mt-4
-}
