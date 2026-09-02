@@ -1,4 +1,4 @@
-export default interface DeliveryCard {
+export default interface DeliveryDetails {
     CustomerName: string;
     CustomerPhone: string;
     CustomerAddress: string;
