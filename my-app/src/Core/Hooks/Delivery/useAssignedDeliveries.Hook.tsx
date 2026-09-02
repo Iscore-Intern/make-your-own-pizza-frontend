@@ -7,15 +7,17 @@ const PAGE_SIZE = 10;
 export default function useAssignedDeliveries() {
 
     const [assignedDeliveries, setAssignedDeliveries] = useState<DeliveryDetails[]>([]);
-    const [loading, setIsLoading] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [error, setError] = useState<string | null>(null);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [totalCount, setTotalCount] = useState<number>(0);
-    let cancelled = false;
 
     useEffect(() => {
+        let cancelled = false;
         
         const fetchDeliveries = async () => {
             setIsLoading(true);
+            setError(null);
 
             try {
                 const data = await FetchAssignedDeliveries(currentPage, PAGE_SIZE);
@@ -26,6 +28,7 @@ export default function useAssignedDeliveries() {
             } catch (error) {
                 if (!cancelled){
                     console.error("Error fetching assigned deliveries:", error);
+                    setError("Failed to load assigned deliveries.");
                 }
             } finally {
                 if (!cancelled){
@@ -35,6 +38,10 @@ export default function useAssignedDeliveries() {
         };
 
         fetchDeliveries();
+
+        return() => {
+            cancelled = true;
+        }
 
     }, [currentPage]);
 
@@ -50,6 +57,14 @@ export default function useAssignedDeliveries() {
     };
 
     
-    return { assignedDeliveries, loading, currentPage, pageSize: PAGE_SIZE, totalCount, gotoNextPage, gotoPrevPage };
+    return {
+        assignedDeliveries,
+        isLoading,
+        error,
+        currentPage,
+        pageSize: PAGE_SIZE,
+        totalCount,
+        gotoNextPage,
+        gotoPrevPage };
     
 }

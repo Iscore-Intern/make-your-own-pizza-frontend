@@ -1,9 +1,9 @@
-import OrderCard from "./DeliveryCard";
+import DeliveryCard from "@/Features/Delivery/DeliveryCard"
 
 export default function AssignedDeliveries() {
     return (
         <div className="bg-white rounded-3xl border border-gray-200 shadow-xl overflow-hidden divide-y divide-gray-100 p-4">
-            <OrderCard
+            <DeliveryCard
                     CustomerName="John Doe"
                     CustomerPhone="123-456-7890"
                     CustomerAddress="123 Main St, Anytown, USA"
