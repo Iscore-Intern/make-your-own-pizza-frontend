@@ -1,4 +1,3 @@
-import DeliveryCardProps from "@/Core/Interfaces/Delivery/DeliveryDetails.Interface";
 import DeliveryListResponse from "@/Core/Interfaces/Delivery/DeliveryListResponse.Interface";
 import axiosInstance from "@/Core/Interceptors/Authentication.Interceptors";
 import toast from 'react-hot-toast';

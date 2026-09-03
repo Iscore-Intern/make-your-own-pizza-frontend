@@ -3,7 +3,7 @@ import DeliveryDetails from "@/Core/Interfaces/Delivery/DeliveryDetails.Interfac
 export default interface AssignedDeliveriesProps {
     items: DeliveryDetails[];
     isLoading: boolean;
-    error : String | null;
+    error : string | null;
     currentPage : number;
     pageSize: number;
     totalCount: number;
