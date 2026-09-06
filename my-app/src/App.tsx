@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import AuthenticationPage from './Features/Authentication/Authentication.page';
+// import AuthenticationPage from './Features/authentication/Authentication.page';
 import ProtectedRoute from './Core/ProtectedRoute';
 import MyOrdersPage from './features/MyOrders/MyOrders.page';
 import ProfilePage from './features/Profile/Profile.Page';
@@ -11,7 +11,7 @@ export default function App() {
             <Routes>
                 <Route path="/singleOrder" element={<OrderDetailsPage />} />
                 <Route path="/orders" element={<MyOrdersPage />} />
-                <Route path="/" element={<AuthenticationPage />} />
+                {/* <Route path="/" element={<AuthenticationPage />} /> */}
                 <Route path="/orders" element={<MyOrdersPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/cart" element={<MyCartPage />} />
