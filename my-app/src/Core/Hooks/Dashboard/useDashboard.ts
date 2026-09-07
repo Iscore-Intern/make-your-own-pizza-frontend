@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 import { orderShape } from "@/Core/Interfaces/ordersDashboard/orderShape";
-import { getOrders } from "@/Core/APIs/ordersDashboard/getOrders.API";
+import { getOrders } from "@/Core/APIs/Dashboard/getOrders.API";
 
 const mockOrders: orderShape[] = [
     { id: "1842", customerName: "Karim Ahmed", itemsCount: 2, totalPrice: 390, status: "On the Way" },
