@@ -1,10 +1,11 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import AuthenticationPage from './features/authentication/Authentication.page'
+import AuthenticationPage from './features/authentication/Authentication.page';
 import ProtectedRoute from './Core/ProtectedRoute';
 import MyOrdersPage from './features/MyOrders/MyOrders.page';
 import ProfilePage from './features/Profile/Profile.Page';
 import MyCartPage from './features/Cart/Cart.page';
 import OrderDetailsPage from './features/OrderDetails/OrderDetails.page';
+import ManagerDashboard from './features/dashboard/ManagerDashboardPage';
 import IngredientsManager from './features/Ingredients/Ingredients.Page';
 export default function App() {
     return (
@@ -12,6 +13,7 @@ export default function App() {
             <Routes>
                 <Route path="/singleOrder" element={<OrderDetailsPage />} />
                 <Route path="/orders" element={<MyOrdersPage />} />
+                <Route path="/dashboard" element={<ManagerDashboard/>}></Route>
                 <Route path="/" element={<AuthenticationPage />} />
                 <Route path="/orders" element={<MyOrdersPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
