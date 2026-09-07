@@ -6,6 +6,7 @@ import ProfilePage from './features/Profile/Profile.Page';
 import MyCartPage from './features/Cart/Cart.page';
 import OrderDetailsPage from './features/OrderDetails/OrderDetails.page';
 import ManagerDashboard from './features/dashboard/ManagerDashboardPage';
+import IngredientsManager from './features/Ingredients/Ingredients.Page';
 export default function App() {
     return (
         <BrowserRouter>
@@ -17,6 +18,8 @@ export default function App() {
                 <Route path="/orders" element={<MyOrdersPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/cart" element={<MyCartPage />} />
+                <Route path="/addIngredient" element={<IngredientsManager />} />
+
                 <Route element={<ProtectedRoute />}>
                     
                 </Route>
