@@ -1,10 +1,11 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import AuthenticationPage from './Features/Authentication/Authentication.page';
+import AuthenticationPage from './features/authentication/Authentication.page'
 import ProtectedRoute from './Core/ProtectedRoute';
 import MyOrdersPage from './features/MyOrders/MyOrders.page';
 import ProfilePage from './features/Profile/Profile.Page';
 import MyCartPage from './features/Cart/Cart.page';
 import OrderDetailsPage from './features/OrderDetails/OrderDetails.page';
+import IngredientsManager from './features/Ingredients/Ingredients.Page';
 export default function App() {
     return (
         <BrowserRouter>
@@ -15,6 +16,7 @@ export default function App() {
                 <Route path="/orders" element={<MyOrdersPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/cart" element={<MyCartPage />} />
+                <Route path="/addIngredient" element={<IngredientsManager />} />
 
                 <Route element={<ProtectedRoute />}>
                     
