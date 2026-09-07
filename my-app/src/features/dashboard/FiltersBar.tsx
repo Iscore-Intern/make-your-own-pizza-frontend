@@ -5,7 +5,7 @@ interface FiltersBarProps{
     setSearchQuery : (query:string)=>void;
 }
 
-const Tabs=["All","Pending","In progress","Completed"];
+const Tabs=["All","Pending","In Progress","Completed"];
 
 export default function FiltersBar(
     {
