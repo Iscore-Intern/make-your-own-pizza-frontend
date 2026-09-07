@@ -22,7 +22,7 @@ export default function FiltersBar(
                     <button 
                     key={tab}
                     onClick={()=>setActiveTab(tab)}
-                    className={`px-5 py-2 rounded-full border-2 border-black font-semibold transition-colors
+                    className={`px-5 py-2 rounded-xl border-2 border-black-font font-semibold transition-colors
                         ${activeTab === tab 
                                     ? "bg-red-color text-white-color border-r-4 border-b-4 border-l-1 border-t-1" 
                                     : "bg-white-color text-black-font hover:bg-gray-100" }
@@ -40,7 +40,7 @@ export default function FiltersBar(
                         placeholder="Search orders..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="w-full px-4 py-2 rounded-xl border-2 border-beige-dark focus:outline-none"
+                        className="w-full px-5 bg-white-color py-2 rounded-xl border-2 border-beige-dark focus:outline-none"
                     />
             </div>
         </div>

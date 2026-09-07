@@ -5,17 +5,18 @@ import MyOrdersPage from './features/MyOrders/MyOrders.page';
 import ProfilePage from './features/Profile/Profile.Page';
 import MyCartPage from './features/Cart/Cart.page';
 import OrderDetailsPage from './features/OrderDetails/OrderDetails.page';
+import ManagerDashboard from './features/dashboard/ManagerDashboardPage';
 export default function App() {
     return (
         <BrowserRouter>
             <Routes>
                 <Route path="/singleOrder" element={<OrderDetailsPage />} />
                 <Route path="/orders" element={<MyOrdersPage />} />
+                <Route path="/dashboard" element={<ManagerDashboard/>}></Route>
                 {/* <Route path="/" element={<AuthenticationPage />} /> */}
                 <Route path="/orders" element={<MyOrdersPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/cart" element={<MyCartPage />} />
-
                 <Route element={<ProtectedRoute />}>
                     
                 </Route>

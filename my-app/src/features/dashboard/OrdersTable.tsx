@@ -8,8 +8,8 @@ interface OrdersTableProps{
 export default function OrdersTable({orders}:OrdersTableProps){
     if (orders.length === 0) {
         return (
-            <div className="w-full p-8 text-center bg-white">
-                <p className="text-gray-500 font-bold text-lg">No orders found.</p>
+            <div className="w-full p-8 text-center">
+                <p className="text-sub-color font-bold text-lg">No orders found.</p>
             </div>
         );
     }
@@ -17,7 +17,7 @@ export default function OrdersTable({orders}:OrdersTableProps){
         <div className="w-full bg-white rounded-2xl overflow-hidden border-2 border-black">
             <table className="w-full text-left border-collapse">
                 <thead>
-                    <tr className="border-b-2 border-black text-gray-400 text-xs uppercase tracking-widest bg-gray-50">
+                    <tr className="border-b-2 border-black text-gray-400 text-xs uppercase tracking-widest">
                         <th className="p-5 font-semibold">Order</th>
                         <th className="p-5 font-semibold">Customer</th>
                         <th className="p-5 font-semibold">Items</th>
