@@ -29,6 +29,7 @@ export default function HomePage() {
         decrementQuantity,
         resetPizza,
         addToCart,
+        cartCount,
     } = useHomePage();
 
     return (
@@ -57,6 +58,18 @@ export default function HomePage() {
                     </div>
 
                     <div className="flex items-center gap-2.5 sm:gap-3 flex-wrap justify-center">
+                        <button
+                            type="button"
+                            onClick={() => navigate("/cart")}
+                            className="px-3.5 py-2 rounded-xl border-2 border-black-font text-xs font-black bg-beige-color hover:bg-beige-dark text-black-font transition-all cursor-pointer flex items-center gap-1.5 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
+                        >
+                            <span>🛒 Cart</span>
+                            {cartCount > 0 && (
+                                <span className="px-1.5 py-0.5 rounded-full bg-red-color text-white-color text-[10px] font-black leading-none">
+                                    {cartCount}
+                                </span>
+                            )}
+                        </button>
                         <button
                             type="button"
                             onClick={() => navigate("/dashboard")}

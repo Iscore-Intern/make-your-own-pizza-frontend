@@ -10,6 +10,7 @@ import ManagerDashboard from './features/dashboard/ManagerDashboardPage';
 import IngredientsManager from './features/Ingredients/Ingredients.Page';
 import ManagerOrderDetailsPage from './features/ManagerViewOrder/ManagerOrderDetails.Page';
 import HomePage from './features/Home/HomePage';
+import CartPage from './features/Cart/Cart.page';
 
 export default function App() {
     return (
@@ -17,6 +18,7 @@ export default function App() {
             <Routes>
                 <Route path="/home" element={<HomePage />} />
                 <Route path="/builder" element={<HomePage />} />
+                <Route path="/cart" element={<CartPage />} />
                 <Route path="/delivery" element={<DeliveryHomePage />} />
                 <Route path="/delivery/:orderId" element={<DeliveryDetailsPage />} />
                 <Route path="/singleOrder" element={<OrderDetailsPage />} />

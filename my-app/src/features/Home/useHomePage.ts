@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { ingredientItem } from "@/Core/Interfaces/Ingredients/ingredient.types";
 import { GetIngredients } from "@/Core/APIs/Ingredients/GetIngredients.API";
 import { PizzaSize, SizeOption, CustomPizzaConfig } from "@/Core/Interfaces/Home/PizzaCustomization.Interface";
+import { CartItem } from "@/Core/Interfaces/Cart/CartItem.Interface";
 import toast from "react-hot-toast";
 
 export const SIZE_OPTIONS: SizeOption[] = [
@@ -72,6 +73,16 @@ export default function useHomePage() {
     const [searchQuery, setSearchQuery] = useState<string>("");
     const [quantity, setQuantity] = useState<number>(1);
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [cartCount, setCartCount] = useState<number>(() => {
+        try {
+            const raw = localStorage.getItem("cart");
+            if (!raw) return 0;
+            const items: CartItem[] = JSON.parse(raw);
+            return Array.isArray(items) ? items.reduce((sum, item) => sum + (item.quantity || 1), 0) : 0;
+        } catch {
+            return 0;
+        }
+    });
 
     // Fetch ingredients using the shared API
     useEffect(() => {
@@ -160,7 +171,33 @@ export default function useHomePage() {
     };
 
     const addToCart = () => {
-        toast.success(`Configured ${quantity} ${selectedSize} Pizza! 🍕`);
+        const newItem: CartItem = {
+            id: `pizza-${Date.now()}`,
+            name: `Custom ${selectedSize} Pizza`,
+            size: selectedSize,
+            description:
+                selectedIngredients.length > 0
+                    ? selectedIngredients.map((i) => i.name).join(", ")
+                    : "Plain Mozzarella & Tomato Sauce",
+            price: unitPrice,
+            quantity: quantity,
+        };
+
+        try {
+            const raw = localStorage.getItem("cart");
+            let items: CartItem[] = [];
+            if (raw) {
+                const parsed = JSON.parse(raw);
+                if (Array.isArray(parsed)) items = parsed;
+            }
+            items.push(newItem);
+            localStorage.setItem("cart", JSON.stringify(items));
+            const newCount = items.reduce((sum, item) => sum + (item.quantity || 1), 0);
+            setCartCount(newCount);
+            toast.success(`Added ${quantity}x Custom ${selectedSize} Pizza to Cart! 🛒`);
+        } catch {
+            toast.error("Failed to add pizza to cart");
+        }
     };
 
     const pizzaConfig: CustomPizzaConfig = {
@@ -189,6 +226,7 @@ export default function useHomePage() {
         unitPrice,
         totalPrice,
         pizzaConfig,
+        cartCount,
         toggleIngredient,
         selectSize,
         selectCategory,
