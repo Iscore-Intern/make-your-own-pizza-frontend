@@ -1,12 +1,12 @@
-import { PizzaItem } from "../OrderDetails/orderinfo";
+import { OrderItem } from "@/Core/Interfaces/ManagerViewOrder/ManagerViewOrder.Interface";
 
 interface OrderDetailsCardProps {
-    pizzas: PizzaItem[];
+    items: OrderItem[];
     totalPrice: number;
 }
 
-export default function OrderDetailsCard({ pizzas, totalPrice }: OrderDetailsCardProps) {
-    if (!pizzas || pizzas.length === 0) return null;
+export default function OrderDetailsCard({ items, totalPrice }: OrderDetailsCardProps) {
+    if (!items || items.length === 0) return null;
 
     return (
         <div className="w-full bg-white-color rounded-3xl border-black-font border-t-2 border-l-2 border-r-6 border-b-6 overflow-hidden">
@@ -17,14 +17,12 @@ export default function OrderDetailsCard({ pizzas, totalPrice }: OrderDetailsCar
             </div>
             <div className="p-6 flex flex-col gap-4">
                 <div className="flex flex-col divide-y divide-gray-100">
-                    {pizzas.map((pizza) => {
-                        const ingredientsText = pizza.ingredients
-                            ?.map((ing) => ing.ingredientName)
-                            .join(", ");
+                    {items.map((item) => {
+                        const toppingsText = item.toppings?.join(", ");
 
                         return (
                             <div
-                                key={pizza.pizzaId}
+                                key={item.id}
                                 className="flex items-center justify-between py-3 first:pt-0 last:pb-0"
                             >
                                 <div className="flex items-center gap-3">
@@ -32,18 +30,25 @@ export default function OrderDetailsCard({ pizzas, totalPrice }: OrderDetailsCar
                                         🍕
                                     </span>
                                     <div className="flex flex-col">
-                                        <span className="font-bold text-black-font text-base">
-                                            {pizza.pizzaName}
-                                        </span>
-                                        {ingredientsText && (
+                                        <div className="flex items-center gap-2 flex-wrap">
+                                            <span className="font-bold text-black-font text-base">
+                                                {item.quantity > 1 ? `${item.quantity}x ` : ""}{item.name}
+                                            </span>
+                                            {item.size && (
+                                                <span className="text-[11px] font-bold px-2 py-0.5 rounded-md bg-beige-color border border-black-font text-black-font">
+                                                    {item.size}
+                                                </span>
+                                            )}
+                                        </div>
+                                        {toppingsText && (
                                             <span className="text-xs text-sub-color font-medium">
-                                                {ingredientsText}
+                                                {toppingsText}
                                             </span>
                                         )}
                                     </div>
                                 </div>
                                 <div className="font-bold text-black-font text-base">
-                                    EGP {pizza.price}
+                                    EGP {item.price * (item.quantity || 1)}
                                 </div>
                             </div>
                         );

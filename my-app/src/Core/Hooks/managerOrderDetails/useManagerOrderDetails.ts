@@ -10,42 +10,40 @@ const mockOrderDetails: ManagerViewOrder = {
     orderId: "123", 
     totalPrice: 390,
     paymentMethod: 1,
-    customerPhone: "+20 100 123 4567",
     status: "Waiting For Delivery",
     createdAt: "2026-08-22T12:10:00Z",
-    pizzas: [
+    note: "Extra crispy please!",
+    customer: {
+        name: "Karim Ahmed",
+        phone: "+20 100 123 4567",
+        email: "karim@example.com",
+    },
+    deliveryAddress: {
+        street: "12 Tahrir St",
+        district: "Downtown",
+        city: "Cairo",
+        floor: "3",
+        apartment: "15",
+        formatted: "12 Tahrir St, Downtown, Cairo (Floor 3, Apt 15)",
+    },
+    items: [
         {
-            pizzaId: "p1",
-            pizzaName: "Margherita (Large)",
+            id: "p1",
+            name: "Margherita",
+            size: "Large",
             price: 195,
-            ingredients: [
-                { ingredientId: "i1", ingredientName: "Mozzarella", quantity: 1 },
-                { ingredientId: "i2", ingredientName: "Fresh Basil", quantity: 1 }
-            ]
+            quantity: 1,
+            toppings: ["Mozzarella", "Fresh Basil"],
         },
         {
-            pizzaId: "p2",
-            pizzaName: "Pepperoni Feast (Medium)",
+            id: "p2",
+            name: "Pepperoni Feast",
+            size: "Medium",
             price: 195,
-            ingredients: [
-                { ingredientId: "i3", ingredientName: "Pepperoni", quantity: 1 },
-                { ingredientId: "i4", ingredientName: "Mozzarella", quantity: 1 }
-            ]
-        }
+            quantity: 1,
+            toppings: ["Pepperoni", "Mozzarella"],
+        },
     ],
-    customerData: {
-        firstName: "Karim",
-        lastName: "Ahmed",
-        email: "karim@example.com",
-        phone: "+20 100 123 4567",
-        city: "Cairo",
-        street: "Tahrir St",
-        district: "Downtown",
-        building_no: "12",
-        floor_no: "3",
-        apt_no: "15"
-    },
-    customerNote: "Extra crispy please!"
 };
 const mockDrivers: Driver[] = [
     {
@@ -159,13 +157,7 @@ export default function useManagerOrderDetails(orderId:string | undefined){
     };
     // formatting address
     const getFormattedAddress = () => {
-        if (!order?.customerData) return "Address not available";
-        const { building_no, street, city } = order.customerData;
-        const parts: string[] = [];
-        if (building_no && street) parts.push(`${building_no} ${street}`);
-        else if (street) parts.push(street);
-        if (city) parts.push(city);
-        return parts.length > 0 ? parts.join(", ") : "Address not available";
+        return order?.deliveryAddress?.formatted || "Address not available";
     };
 
     // formatting placed date

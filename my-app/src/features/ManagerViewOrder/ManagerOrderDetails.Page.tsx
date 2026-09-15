@@ -67,9 +67,7 @@ export default function ManagerOrderDetailsPage() {
         );
     }
 
-    const customerFullName = order.customerData
-        ? `${order.customerData.firstName} ${order.customerData.lastName}`
-        : "Unknown Customer";
+    const customerFullName = order.customer?.name || "Customer";
 
     return (
         <div
@@ -94,19 +92,19 @@ export default function ManagerOrderDetailsPage() {
                 {/* 1. Customer Card */}
                 <CustomerInfoCard
                     customerName={customerFullName}
-                    customerPhone={order.customerPhone}
+                    customerPhone={order.customer?.phone || ""}
                     customerAddress={getFormattedAddress()}
                     placedAt={getFormattedPlacedAt()}
                 />
 
                 {/* 2. Items Card */}
                 <OrderDetailsCard
-                    pizzas={order.pizzas}
+                    items={order.items}
                     totalPrice={order.totalPrice}
                 />
 
                 {/* 3. Customer Note Card */}
-                <CustomerNoteCard note={order.customerNote} />
+                <CustomerNoteCard note={order.note} />
 
                 {/* 4. Assign Delivery Card */}
                 <AssignDeliveryCard
