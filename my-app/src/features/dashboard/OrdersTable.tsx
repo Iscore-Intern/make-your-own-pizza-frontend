@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { orderShape } from "@/Core/Interfaces/ordersDashboard/orderShape";
 import { statusStyles } from "@/Shared/OrderStatus";
 interface OrdersTableProps{
@@ -5,6 +6,7 @@ interface OrdersTableProps{
 }
 
 export default function OrdersTable({orders}:OrdersTableProps){
+    const navigate = useNavigate();
     if (orders.length === 0) {
         return (
             <div className="w-full p-8 text-center">
@@ -41,7 +43,10 @@ export default function OrdersTable({orders}:OrdersTableProps){
                                 }`}>{order.status}</span>
                             </td>
                             <td className="p-5 text-right">
-                                <button className="px-4 py-3 rounded-xl bg-red-color text-white-color border-2 border-black-font border-r-4 border-b-4 hover:translate-x-0.5 hover:translate-y-0.5 hover:border-r-2 hover:border-b-2 transition-all duration-200">
+                                <button 
+                                    onClick={() => navigate(`/viewOrder?orderId=${order.id}`)}
+                                    className="px-4 py-3 rounded-xl bg-red-color text-white-color border-2 border-black-font border-r-4 border-b-4 hover:translate-x-0.5 hover:translate-y-0.5 hover:border-r-2 hover:border-b-2 transition-all duration-200 cursor-pointer"
+                                >
                                     View Order
                                 </button>
                             </td>

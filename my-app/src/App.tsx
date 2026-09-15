@@ -16,6 +16,7 @@ export default function App() {
                 <Route path="/orders" element={<MyOrdersPage />} />
                 <Route path="/dashboard" element={<ManagerDashboard/>}></Route>
                 <Route path="/viewOrder" element={<ManagerOrderDetailsPage/>}></Route>
+                <Route path="/viewOrder/:orderId" element={<ManagerOrderDetailsPage/>}></Route>
                 <Route path="/" element={<AuthenticationPage />} />
                 <Route path="/orders" element={<MyOrdersPage />} />
                 <Route path="/profile" element={<ProfilePage />} />

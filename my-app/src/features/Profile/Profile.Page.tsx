@@ -1,6 +1,6 @@
 import ProfileHeader from "./ProfileHeader"
 import ProfileForm from "./ProfileForm";
-import Address from "../Address/address";
+import Address from "../address/address";
 import useProfilePage from "@/Core/Hooks/Profile/useProfilePage.Hook";
 import "./Profile.css";
 

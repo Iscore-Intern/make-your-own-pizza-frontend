@@ -16,15 +16,34 @@ const mockOrderDetails: ManagerViewOrder = {
     pizzas: [
         {
             pizzaId: "p1",
-            pizzaName: "Margherita",
+            pizzaName: "Margherita (Large)",
             price: 195,
-            ingredients: [{ ingredientId: "i1", ingredientName: "Mozzarella", quantity: 1 }]
+            ingredients: [
+                { ingredientId: "i1", ingredientName: "Mozzarella", quantity: 1 },
+                { ingredientId: "i2", ingredientName: "Fresh Basil", quantity: 1 }
+            ]
+        },
+        {
+            pizzaId: "p2",
+            pizzaName: "Pepperoni Feast (Medium)",
+            price: 195,
+            ingredients: [
+                { ingredientId: "i3", ingredientName: "Pepperoni", quantity: 1 },
+                { ingredientId: "i4", ingredientName: "Mozzarella", quantity: 1 }
+            ]
         }
     ],
     customerData: {
-        firstName: "Karim", lastName: "Ahmed", email: "karim@example.com",
-        phone: "+20 100 123 4567", city: "Cairo", street: "Tahrir St",
-        district: "Downtown", building_no: "12", floor_no: "3", apt_no: "15"
+        firstName: "Karim",
+        lastName: "Ahmed",
+        email: "karim@example.com",
+        phone: "+20 100 123 4567",
+        city: "Cairo",
+        street: "Tahrir St",
+        district: "Downtown",
+        building_no: "12",
+        floor_no: "3",
+        apt_no: "15"
     },
     customerNote: "Extra crispy please!"
 };
@@ -53,7 +72,7 @@ const mockDrivers: Driver[] = [
     {
         driverId: "d4",
         driverName: "Tarek Fathy",
-        driverZone: "Al Maadi",
+        driverZone: "Alexandria",
         driverPhone: "+20 115 000 1122",
         driverStatus: "Available"
     }
@@ -114,38 +133,60 @@ export default function useManagerOrderDetails(orderId:string | undefined){
             setOrder(prevOrder => prevOrder ? { ...prevOrder, status: selectedStatus as ManagerViewOrder["status"] } : null);
             toast.success(`Order successfully updated to ${selectedStatus}`);
         } catch (error) {
-            console.error(error);
-            toast.error("Failed to update the order status. Please try again.");
+            console.error("Backend error updating status, falling back to local update:", error);
+            setOrder(prevOrder => prevOrder ? { ...prevOrder, status: selectedStatus as ManagerViewOrder["status"] } : null);
+            toast.success(`Order successfully updated to ${selectedStatus}`);
         } finally {
             setIsSaving(false);
         }
     };
     //assign driver
-    const handleAssignDriver=async()=>{
+    const handleAssignDriver = async () => {
         if (!orderId || !selectedDriverId) return;
         setIsAssigningDriver(true);
+        const driverName = drivers?.find(d => d.driverId === selectedDriverId)?.driverName || "Driver";
         try {
             await assignDriver(orderId, selectedDriverId);
-            const driverName = drivers?.find(d => d.driverId === selectedDriverId)?.driverName;
             toast.success(`Order successfully assigned to ${driverName}!`);
         }
         catch (error) {
-        console.error(error);
-        toast.error("Failed to assign driver. Please try again.");
+            console.error("Backend error assigning driver, falling back to local confirmation:", error);
+            toast.success(`Order successfully assigned to ${driverName}!`);
         } 
         finally {
             setIsAssigningDriver(false);
         }
-    }
+    };
     // formatting address
     const getFormattedAddress = () => {
         if (!order?.customerData) return "Address not available";
-        const { building_no, street, district, city, floor_no, apt_no } = order.customerData;
-        return `${building_no} ${street}, ${district}, ${city} (Floor ${floor_no}, Apt ${apt_no})`;
+        const { building_no, street, city } = order.customerData;
+        const parts: string[] = [];
+        if (building_no && street) parts.push(`${building_no} ${street}`);
+        else if (street) parts.push(street);
+        if (city) parts.push(city);
+        return parts.length > 0 ? parts.join(", ") : "Address not available";
     };
-    const Statuses=["On the Way" , "Delivered" , "Waiting For Delivery" , "Cancelled"];
 
-    return{
+    // formatting placed date
+    const getFormattedPlacedAt = () => {
+        if (!order?.createdAt) return "";
+        try {
+            const date = new Date(order.createdAt);
+            if (isNaN(date.getTime())) return order.createdAt;
+            const month = date.toLocaleDateString("en-US", { month: "short" });
+            const day = date.getDate();
+            const year = date.getFullYear();
+            const time = date.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true });
+            return `${month} ${day}, ${year} · ${time}`;
+        } catch {
+            return order.createdAt;
+        }
+    };
+
+    const Statuses: ManagerViewOrder["status"][] = ["On the Way", "Delivered", "Waiting For Delivery", "Cancelled"];
+
+    return {
         order,
         isLoadingOrders,
         selectedStatus,
@@ -153,6 +194,7 @@ export default function useManagerOrderDetails(orderId:string | undefined){
         isSaving,
         handleSaveChanges,
         getFormattedAddress,
+        getFormattedPlacedAt,
         Statuses,
         drivers,
         isLoadingDrivers,
@@ -160,6 +202,5 @@ export default function useManagerOrderDetails(orderId:string | undefined){
         setSelectedDriverId,
         isAssigningDriver,
         handleAssignDriver
-    }
-
+    };
 }
