@@ -1,9 +1,12 @@
 import { useNavigate } from 'react-router-dom'; 
-import CartItem from './CartItem';
-import SpecialRequest from './SpecialRequest';
 import PaymentSummary from './PaymentSummary';
 
-export default function MyCart(props: any) {
+interface MyCartProps {
+  orders?: any[];
+  isLoading?: boolean;
+}
+
+export default function MyCart(_props: MyCartProps) {
   const navigate = useNavigate(); 
 
   return (

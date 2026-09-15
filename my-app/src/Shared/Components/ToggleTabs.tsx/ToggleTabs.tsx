@@ -10,7 +10,7 @@ export default function ToggleTabs<T>({ options, activeValue, onChange }: Toggle
                 <button
                     key={index}
                     type="button"
-                    className={`px-6 py-2.5 rounded-xl font-bold text-sm transition-all duration-300 ${
+                    className={`px-6 py-2.5 rounded-xl font-bold text-sm transition-all duration-300 cursor-pointer ${
                         activeValue === option.value
                             ? 'bg-red-color text-white-color shadow-md'
                             : 'text-gray-600 hover:text-black-font'

@@ -5,21 +5,23 @@ import MyOrdersPage from './features/MyOrders/MyOrders.page';
 import ProfilePage from './features/Profile/Profile.Page';
 import MyCartPage from './features/Cart/Cart.page';
 import DeliveryHomePage from './features/Delivery/DeliveryHomepage.Page';
+import DeliveryDetailsPage from './features/Delivery/DeliveryDetails.Page';
 import OrderDetailsPage from './features/OrderDetails/OrderDetails.page';
+
 export default function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/singleOrder" element={<OrderDetailsPage />} />
-                <Route path="/orders" element={<MyOrdersPage />} />
-                <Route path="/delivery" element={<DeliveryHomePage />} />
                 <Route path="/" element={<AuthenticationPage />} />
+                <Route path="/delivery" element={<DeliveryHomePage />} />
+                <Route path="/delivery/:orderId" element={<DeliveryDetailsPage />} />
+                <Route path="/singleOrder" element={<OrderDetailsPage />} />
                 <Route path="/orders" element={<MyOrdersPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/cart" element={<MyCartPage />} />
 
                 <Route element={<ProtectedRoute />}>
-                    
+                    {/* Protected routes can be placed here as needed */}
                 </Route>
                 <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>

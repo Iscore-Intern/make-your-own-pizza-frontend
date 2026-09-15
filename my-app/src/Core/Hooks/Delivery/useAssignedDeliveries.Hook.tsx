@@ -1,11 +1,10 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import DeliveryDetails from "@/Core/Interfaces/Delivery/DeliveryDetails.Interface";
 import FetchAssignedDeliveries from "@/Core/APIs/Delivery/FetchAssignedDeliveries.API";
 
 const PAGE_SIZE = 10;
 
 export default function useAssignedDeliveries() {
-
     const [assignedDeliveries, setAssignedDeliveries] = useState<DeliveryDetails[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
@@ -14,35 +13,36 @@ export default function useAssignedDeliveries() {
 
     useEffect(() => {
         let cancelled = false;
-        
+
         const fetchDeliveries = async () => {
             setIsLoading(true);
             setError(null);
 
             try {
                 const data = await FetchAssignedDeliveries(currentPage, PAGE_SIZE);
-                if (!cancelled){
-                setAssignedDeliveries(data.items);
-                setTotalCount(data.totalCount);
+                if (!cancelled) {
+                    setAssignedDeliveries(data.items || []);
+                    setTotalCount(data.totalCount || 0);
                 }
-            } catch (error) {
-                if (!cancelled){
-                    console.error("Error fetching assigned deliveries:", error);
+            } catch (err) {
+                if (!cancelled) {
+                    console.error("Error fetching assigned deliveries:", err);
                     setError("Failed to load assigned deliveries.");
+                    setAssignedDeliveries([]);
+                    setTotalCount(0);
                 }
             } finally {
-                if (!cancelled){
-                setIsLoading(false);
+                if (!cancelled) {
+                    setIsLoading(false);
                 }
             }
         };
 
         fetchDeliveries();
 
-        return() => {
+        return () => {
             cancelled = true;
-        }
-
+        };
     }, [currentPage]);
 
     const gotoNextPage = () => {
@@ -56,7 +56,6 @@ export default function useAssignedDeliveries() {
         }
     };
 
-    
     return {
         assignedDeliveries,
         isLoading,
@@ -65,6 +64,6 @@ export default function useAssignedDeliveries() {
         pageSize: PAGE_SIZE,
         totalCount,
         gotoNextPage,
-        gotoPrevPage };
-    
+        gotoPrevPage
+    };
 }

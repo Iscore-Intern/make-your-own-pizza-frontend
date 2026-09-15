@@ -1,4 +1,3 @@
-import CartItemType from '../../Core/Interfaces/Cart/CartItem.Interface';
 import CartItemProps from '../../Core/Interfaces/Cart/CartItemProps.Interface';
 
 
