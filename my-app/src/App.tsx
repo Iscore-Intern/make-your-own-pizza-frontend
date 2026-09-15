@@ -7,6 +7,9 @@ import MyCartPage from './features/Cart/Cart.page';
 import DeliveryHomePage from './features/Delivery/DeliveryHomepage.Page';
 import DeliveryDetailsPage from './features/Delivery/DeliveryDetails.Page';
 import OrderDetailsPage from './features/OrderDetails/OrderDetails.page';
+import ManagerDashboard from './features/dashboard/ManagerDashboardPage';
+import IngredientsManager from './features/Ingredients/Ingredients.Page';
+import ManagerOrderDetailsPage from './features/ManagerViewOrder/ManagerOrderDetails.Page';
 
 export default function App() {
     return (
@@ -19,9 +22,12 @@ export default function App() {
                 <Route path="/orders" element={<MyOrdersPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/cart" element={<MyCartPage />} />
+                <Route path="/addIngredient" element={<IngredientsManager />} />
+                <Route path="/dashboard" element={<ManagerDashboard />} />
+                <Route path="/viewOrder" element={<ManagerOrderDetailsPage />} />
+                <Route path="/viewOrder/:orderId" element={<ManagerOrderDetailsPage />} />
 
                 <Route element={<ProtectedRoute />}>
-                    {/* Protected routes can be placed here as needed */}
                 </Route>
                 <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
