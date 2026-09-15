@@ -27,7 +27,9 @@
 }
 
 .cart-header button:hover {
-  border-color: var(--accent-border);
+  color: var(--accent-hover);
+  background: rgb(202, 202, 202);
+
 }
 
 .cart-items-list {

@@ -21,8 +21,8 @@ export const useOrderDetails=()=>{
             catch(error){
                 if(axios.isAxiosError(error)){
                     const backendMessage=error?.response?.data?.message;
-                    setError(backendMessage || "Failed to fetch order");
-                    toast.error(backendMessage);
+                    setError(backendMessage || "An error occurred");
+                    toast.error(backendMessage || "An error occurred");
                 }
                 else{
                     setError("An error occurred, please try again later");
