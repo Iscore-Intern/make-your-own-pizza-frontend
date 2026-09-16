@@ -9,10 +9,9 @@ import toast from "react-hot-toast";
 const mockOrderDetails: ManagerViewOrder = {
     orderId: "123", 
     totalPrice: 390,
-    paymentMethod: 1,
+    paymentMethod: 0, // 0: Cash on Delivery
     status: "Waiting For Delivery",
     createdAt: "2026-08-22T12:10:00Z",
-    note: "Extra crispy please!",
     customer: {
         name: "Karim Ahmed",
         phone: "+20 100 123 4567",

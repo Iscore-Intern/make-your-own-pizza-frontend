@@ -28,8 +28,7 @@ export default interface ManagerViewOrder {
     orderId: string;
     status: OrderStatus;
     createdAt: string;
-    note?: string;
-    paymentMethod: number; // 0: Cash on Delivery, 1: Visa
+    paymentMethod: number; // 0: Cash on Delivery
     totalPrice: number;
     customer: CustomerInfo;
     deliveryAddress: DeliveryAddress;

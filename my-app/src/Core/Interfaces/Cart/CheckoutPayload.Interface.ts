@@ -11,8 +11,7 @@ export interface CheckoutPayload {
     items: CartItem[];
     customer?: CustomerContact;
     deliveryAddress?: AddressValues & { formatted?: string };
-    specialRequest?: string;
-    paymentMethod: number; // 0: Cash on Delivery, 1: Visa
+    paymentMethod: number; // 0: Cash on Delivery
     totalPrice: number;
 }
 

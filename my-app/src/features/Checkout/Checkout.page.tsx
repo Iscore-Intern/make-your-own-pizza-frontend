@@ -3,7 +3,6 @@ import useCheckout from "./useCheckout";
 import DeliveryAddressCard from "./DeliveryAddressCard";
 import OrderReviewCard from "./OrderReviewCard";
 import PaymentMethodSelector from "@/features/Cart/PaymentMethodSelector";
-import SpecialRequestCard from "@/features/Cart/SpecialRequestCard";
 import CheckoutSummaryCard from "./CheckoutSummaryCard";
 import BG from "../../../BG.jpg";
 
@@ -17,10 +16,6 @@ export default function CheckoutPage() {
         formattedAddress,
         isEditingAddress,
         setIsEditingAddress,
-        paymentMethod,
-        setPaymentMethod,
-        specialRequest,
-        setSpecialRequest,
         subtotal,
         deliveryFee,
         total,
@@ -106,7 +101,7 @@ export default function CheckoutPage() {
                 ) : (
                     /* Main Checkout Grid */
                     <main className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-                        {/* Left Column: Delivery Details, Order Review, Payment, Notes */}
+                        {/* Left Column: Delivery Details, Order Review, Payment */}
                         <section className="lg:col-span-7 flex flex-col gap-5">
                             {/* 1. Delivery Address & Contact Card */}
                             <DeliveryAddressCard
@@ -122,17 +117,8 @@ export default function CheckoutPage() {
                             {/* 2. Order Review Items */}
                             <OrderReviewCard items={items} />
 
-                            {/* 3. Payment Method (Reused) */}
-                            <PaymentMethodSelector
-                                selectedMethod={paymentMethod}
-                                onSelectMethod={setPaymentMethod}
-                            />
-
-                            {/* 4. Special Instructions (Reused) */}
-                            <SpecialRequestCard
-                                value={specialRequest}
-                                onChange={setSpecialRequest}
-                            />
+                            {/* 3. Payment Method (Cash on Delivery) */}
+                            <PaymentMethodSelector />
                         </section>
 
                         {/* Right Column: Checkout Summary (Sticky) */}
@@ -142,7 +128,6 @@ export default function CheckoutPage() {
                                 deliveryFee={deliveryFee}
                                 total={total}
                                 totalItemCount={totalItemCount}
-                                paymentMethod={paymentMethod}
                                 isSubmitting={isSubmitting}
                                 onPlaceOrder={handlePlaceOrder}
                             />

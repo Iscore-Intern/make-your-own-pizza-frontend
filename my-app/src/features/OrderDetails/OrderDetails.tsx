@@ -8,8 +8,7 @@ interface OrderDetailsProps{
 export default function OrderDetails({order}:OrderDetailsProps){
     const badgeStyle = statusStyles[order.status];
     const paymentMethodMap: Record<number, string> = {
-    0: "Cash on Delivery",
-    2: "Visa",
+        0: "Cash on Delivery",
     };  
     return(
         <div className="max-w-3xl mx-auto mt-24 flex flex-col gap-4">

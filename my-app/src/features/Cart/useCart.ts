@@ -42,8 +42,6 @@ export default function useCart() {
         return initialMockCart;
     });
 
-    const [specialRequest, setSpecialRequest] = useState<string>("");
-    const [paymentMethod, setPaymentMethod] = useState<number>(0); // 0: Cash on Delivery, 1: Visa
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const isSubmitting = false;
 
@@ -127,10 +125,6 @@ export default function useCart() {
         deliveryFee,
         total,
         totalItemCount,
-        specialRequest,
-        setSpecialRequest,
-        paymentMethod,
-        setPaymentMethod,
         isLoading,
         isSubmitting,
         updateQuantity,

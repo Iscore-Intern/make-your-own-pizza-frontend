@@ -1,8 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import useCart from "./useCart";
 import CartItemCard from "./CartItemCard";
-import SpecialRequestCard from "./SpecialRequestCard";
-import PaymentMethodSelector from "./PaymentMethodSelector";
 import PaymentSummaryCard from "./PaymentSummaryCard";
 import BG from "../../../BG.jpg";
 
@@ -15,10 +13,6 @@ export default function CartPage() {
         deliveryFee,
         total,
         totalItemCount,
-        specialRequest,
-        setSpecialRequest,
-        paymentMethod,
-        setPaymentMethod,
         isSubmitting,
         updateQuantity,
         removeItem,
@@ -102,18 +96,6 @@ export default function CartPage() {
                                     />
                                 ))}
                             </div>
-
-                            {/* Special Instructions Card */}
-                            <SpecialRequestCard
-                                value={specialRequest}
-                                onChange={setSpecialRequest}
-                            />
-
-                            {/* Payment Method Selector Card */}
-                            <PaymentMethodSelector
-                                selectedMethod={paymentMethod}
-                                onSelectMethod={setPaymentMethod}
-                            />
                         </div>
 
                         {/* Right Column: Order & Payment Summary */}

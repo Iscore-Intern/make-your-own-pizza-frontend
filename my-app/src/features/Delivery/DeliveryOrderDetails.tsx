@@ -17,9 +17,7 @@ export default function DeliveryOrderDetails({
     const currentStatus = order.status || 'Waiting For Delivery';
     const badgeStyle = statusStyles[currentStatus as keyof typeof statusStyles] || 'bg-gray-100 text-gray-700 border-gray-300';
 
-    const paymentMethodText = typeof order.paymentMethod === 'number'
-        ? (order.paymentMethod === 0 ? "Cash on Delivery" : "Visa / Online")
-        : (order.paymentMethod || "Cash on Delivery");
+    const paymentMethodText = "Cash on Delivery";
 
     return (
         <div className="max-w-3xl mx-auto p-4 md:p-6 flex flex-col gap-6">

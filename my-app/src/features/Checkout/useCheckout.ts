@@ -42,8 +42,6 @@ export default function useCheckout() {
     const [customerContact, setCustomerContact] = useState<CustomerContact>(defaultContact);
     const [deliveryAddress, setDeliveryAddress] = useState<AddressValues>(defaultAddress);
     const [isEditingAddress, setIsEditingAddress] = useState<boolean>(false);
-    const [paymentMethod, setPaymentMethod] = useState<number>(0); // 0: Cash on Delivery, 1: Visa
-    const [specialRequest, setSpecialRequest] = useState<string>("");
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
@@ -159,8 +157,7 @@ export default function useCheckout() {
                 ...deliveryAddress,
                 formatted: formattedAddress,
             },
-            specialRequest: specialRequest.trim() || undefined,
-            paymentMethod,
+            paymentMethod: 0, // 0: Cash on Delivery
             totalPrice: total,
         };
 
@@ -186,10 +183,6 @@ export default function useCheckout() {
         formattedAddress,
         isEditingAddress,
         setIsEditingAddress,
-        paymentMethod,
-        setPaymentMethod,
-        specialRequest,
-        setSpecialRequest,
         subtotal,
         deliveryFee,
         total,

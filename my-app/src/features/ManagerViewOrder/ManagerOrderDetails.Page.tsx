@@ -2,7 +2,6 @@ import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import useManagerOrderDetails from "@/Core/Hooks/managerOrderDetails/useManagerOrderDetails";
 import CustomerInfoCard from "./CustomerInfoCard";
 import OrderDetailsCard from "./OrderDetailsCard";
-import CustomerNoteCard from "./CustomerNoteCard";
 import AssignDeliveryCard from "./AssignDeliveryCard";
 import UpdateStatusCard from "./UpdateStatusCard";
 import BG from "../../../BG.jpg";
@@ -103,10 +102,7 @@ export default function ManagerOrderDetailsPage() {
                     totalPrice={order.totalPrice}
                 />
 
-                {/* 3. Customer Note Card */}
-                <CustomerNoteCard note={order.note} />
-
-                {/* 4. Assign Delivery Card */}
+                {/* 3. Assign Delivery Card */}
                 <AssignDeliveryCard
                     drivers={drivers}
                     isLoadingDrivers={isLoadingDrivers}

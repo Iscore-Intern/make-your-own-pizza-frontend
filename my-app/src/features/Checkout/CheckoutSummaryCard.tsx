@@ -5,7 +5,6 @@ interface CheckoutSummaryCardProps {
     deliveryFee: number;
     total: number;
     totalItemCount: number;
-    paymentMethod: number;
     isSubmitting: boolean;
     onPlaceOrder: () => void;
 }
@@ -15,7 +14,6 @@ export default function CheckoutSummaryCard({
     deliveryFee,
     total,
     totalItemCount,
-    paymentMethod,
     isSubmitting,
     onPlaceOrder,
 }: CheckoutSummaryCardProps) {
@@ -48,7 +46,7 @@ export default function CheckoutSummaryCard({
                     <div className="flex justify-between items-center text-sub-color font-semibold pt-1">
                         <span>Payment Via</span>
                         <span className="text-black-font font-bold flex items-center gap-1">
-                            <span>{paymentMethod === 0 ? "💵 Cash on Delivery" : "💳 Credit Card"}</span>
+                            <span>💵 Cash on Delivery</span>
                         </span>
                     </div>
                 </div>

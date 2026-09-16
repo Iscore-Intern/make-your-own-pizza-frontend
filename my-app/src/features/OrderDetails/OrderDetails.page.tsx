@@ -7,7 +7,7 @@ export default function OrderDetailsPage() {
     const mockOrder: OrderDetailsData = {
         orderId: "100",
         totalPrice: 190,
-        paymentMethod: 2,
+        paymentMethod: 0,
         customerPhone: "01008052461",
         status: "Delivered",
         createdAt: "2026-08-04T13:10:00+00:00",
