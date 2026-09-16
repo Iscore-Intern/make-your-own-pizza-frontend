@@ -1,5 +1,5 @@
-import { Navigate, Outlet } from 'react-router-dom';
-import { RoleEnum } from './Utils/auth.utils';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import { getAuthRole, getRoleDefaultPath } from './Utils/auth.utils';
 
 interface ProtectedRouteProps {
     allowedRoles?: number[];
@@ -7,18 +7,26 @@ interface ProtectedRouteProps {
 
 export default function ProtectedRoute({ allowedRoles }: ProtectedRouteProps) {
     const token = localStorage.getItem('token');
-    const userRoleStr = localStorage.getItem('role');
-    const userRole = userRoleStr !== null ? Number(userRoleStr) : null;
+    const location = useLocation();
 
     if (!token) {
         return <Navigate to="/" replace />;
     }
 
-    if (allowedRoles && (userRole === null || !allowedRoles.includes(userRole))) {
-        if (userRole === RoleEnum.Manager) return <Navigate to="/dashboard" replace />;
-        if (userRole === RoleEnum.Delivery) return <Navigate to="/delivery" replace />;
-        return <Navigate to="/home" replace />;
+    if (allowedRoles && allowedRoles.length > 0) {
+        const userRole = getAuthRole();
+
+        if (!allowedRoles.includes(userRole)) {
+            const targetPath = getRoleDefaultPath(userRole);
+
+            // Prevent infinite redirect loop if already on target path
+            if (location.pathname === targetPath) {
+                return <Outlet />;
+            }
+
+            return <Navigate to={targetPath} replace />;
+        }
     }
 
     return <Outlet />;
-}
+}

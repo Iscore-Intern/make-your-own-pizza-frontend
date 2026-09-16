@@ -78,3 +78,31 @@ export function extractUserIdFromToken(token: string, fallbackId?: string): stri
         ""
     );
 }
+
+export function getAuthRole(): number {
+    const raw = localStorage.getItem("role");
+    if (raw !== null && raw !== "") {
+        const num = Number(raw);
+        if (!isNaN(num)) return num;
+        const str = raw.toLowerCase();
+        if (str === "customer") return RoleEnum.Customer;
+        if (str === "manager" || str === "admin") return RoleEnum.Manager;
+        if (str === "delivery" || str === "driver") return RoleEnum.Delivery;
+    }
+
+    const token = localStorage.getItem("token");
+    if (token) {
+        const extracted = extractRoleFromToken(token);
+        localStorage.setItem("role", String(extracted));
+        return extracted;
+    }
+
+    return RoleEnum.Customer;
+}
+
+export function getRoleDefaultPath(role: number): string {
+    if (role === RoleEnum.Manager) return "/dashboard";
+    if (role === RoleEnum.Delivery) return "/delivery";
+    return "/home";
+}
+

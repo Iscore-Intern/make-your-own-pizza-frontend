@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { RoleEnum } from "@/Core/Utils/auth.utils";
+import { getAuthRole } from "@/Core/Utils/auth.utils";
 import { logoutAPI } from "@/Core/APIs/Auth/logout.API";
 import { CartItem } from "@/Core/Interfaces/Cart/CartItem.Interface";
 import toast from "react-hot-toast";
@@ -10,11 +10,7 @@ export const useAppNavbar = () => {
     const location = useLocation();
 
     // Current user role
-    const [role, setRole] = useState<number>(() => {
-        const raw = localStorage.getItem("role");
-        const num = raw !== null ? Number(raw) : NaN;
-        return isNaN(num) ? RoleEnum.Customer : num;
-    });
+    const [role, setRole] = useState<number>(() => getAuthRole());
 
     // Cart items count for customer
     const [cartCount, setCartCount] = useState<number>(() => {
@@ -33,9 +29,7 @@ export const useAppNavbar = () => {
     // Keep role and cart count in sync with storage changes
     useEffect(() => {
         const syncState = () => {
-            const rawRole = localStorage.getItem("role");
-            const numRole = rawRole !== null ? Number(rawRole) : NaN;
-            setRole(isNaN(numRole) ? RoleEnum.Customer : numRole);
+            setRole(getAuthRole());
 
             try {
                 const rawCart = localStorage.getItem("cart");
