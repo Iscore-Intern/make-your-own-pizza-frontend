@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import useCart from "./useCart";
 import CartItemCard from "./CartItemCard";
 import PaymentSummaryCard from "./PaymentSummaryCard";
-import BG from "../../../BG.jpg";
 
 export default function CartPage() {
     const navigate = useNavigate();
@@ -21,11 +20,7 @@ export default function CartPage() {
     } = useCart();
 
     return (
-        <div
-            className="w-full min-h-screen py-8 px-4 sm:px-6"
-            style={{ backgroundImage: `url(${BG})` }}
-        >
-            <div className="max-w-6xl mx-auto flex flex-col gap-6">
+        <div className="flex flex-col gap-6">
                 {/* Top Navigation Bar */}
                 <div className="flex items-center justify-between">
                     <button
@@ -111,7 +106,6 @@ export default function CartPage() {
                         </div>
                     </div>
                 )}
-            </div>
         </div>
     );
 }

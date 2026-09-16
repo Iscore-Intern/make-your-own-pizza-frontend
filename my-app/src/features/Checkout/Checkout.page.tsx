@@ -4,7 +4,6 @@ import DeliveryAddressCard from "./DeliveryAddressCard";
 import OrderReviewCard from "./OrderReviewCard";
 import PaymentMethodSelector from "@/features/Cart/PaymentMethodSelector";
 import CheckoutSummaryCard from "./CheckoutSummaryCard";
-import BG from "../../../BG.jpg";
 
 export default function CheckoutPage() {
     const navigate = useNavigate();
@@ -27,56 +26,23 @@ export default function CheckoutPage() {
     } = useCheckout();
 
     return (
-        <div
-            className="w-full min-h-screen py-8 px-4 sm:px-6"
-            style={{ backgroundImage: `url(${BG})` }}
-        >
-            <div className="max-w-6xl mx-auto flex flex-col gap-6">
-                {/* Top Navigation Bar */}
-                <header className="w-full bg-white-color rounded-3xl border-black-font border-t-2 border-l-2 border-r-6 border-b-6 p-4 px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <div className="flex items-center gap-3">
-                        <button
-                            type="button"
-                            onClick={() => navigate("/cart")}
-                            className="flex items-center gap-2 px-3.5 py-2 bg-beige-color text-black-font font-bold rounded-xl border-2 border-black-font border-r-4 border-b-4 hover:translate-x-0.5 hover:translate-y-0.5 transition-all text-xs cursor-pointer shadow-xs"
-                        >
-                            <span>←</span> Back to Cart
-                        </button>
+        <div className="flex flex-col gap-6">
+            {/* Sub Navigation Bar */}
+            <div className="flex items-center justify-between gap-4">
+                <button
+                    type="button"
+                    onClick={() => navigate("/cart")}
+                    className="flex items-center gap-2 px-3.5 py-2 bg-white-color text-black-font font-bold rounded-xl border-2 border-black-font border-r-4 border-b-4 hover:translate-x-0.5 hover:translate-y-0.5 transition-all text-xs cursor-pointer shadow-xs"
+                >
+                    <span>←</span> Back to Cart
+                </button>
 
-                        <div className="flex items-center gap-2 select-none">
-                            <span className="text-2xl" role="img" aria-label="pizza">
-                                🍕
-                            </span>
-                            <span className="font-black text-black-font text-lg tracking-wider">
-                                CHECKOUT
-                            </span>
-                        </div>
-                    </div>
-
-                    <div className="flex items-center gap-2.5 sm:gap-3 flex-wrap justify-center">
-                        <button
-                            type="button"
-                            onClick={() => navigate("/dashboard")}
-                            className="px-3.5 py-2 rounded-xl border-2 border-black-font text-xs font-bold bg-white-color hover:bg-beige-color text-black-font transition-all cursor-pointer"
-                        >
-                            Dashboard
-                        </button>
-                        <button
-                            type="button"
-                            onClick={() => navigate("/orders")}
-                            className="px-3.5 py-2 rounded-xl border-2 border-black-font text-xs font-bold bg-white-color hover:bg-beige-color text-black-font transition-all cursor-pointer"
-                        >
-                            My Orders
-                        </button>
-                        <button
-                            type="button"
-                            onClick={() => navigate("/profile")}
-                            className="px-3.5 py-2 rounded-xl border-2 border-black-font text-xs font-bold bg-white-color hover:bg-beige-color text-black-font transition-all cursor-pointer"
-                        >
-                            Profile
-                        </button>
-                    </div>
-                </header>
+                <div className="flex items-center gap-2 select-none">
+                    <span className="font-black text-black-font text-lg tracking-wider">
+                        CHECKOUT & DELIVERY 🍕
+                    </span>
+                </div>
+            </div>
 
                 {/* Empty Cart Notice */}
                 {items.length === 0 ? (
@@ -134,7 +100,6 @@ export default function CheckoutPage() {
                         </aside>
                     </main>
                 )}
-            </div>
         </div>
     );
 }

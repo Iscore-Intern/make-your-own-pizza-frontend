@@ -8,19 +8,16 @@ export default function ProfilePage() {
     const { profile, isLoading, isEditing, formik, onEdit, onCancel, onSaveAddress } = useProfilePage();
 
     if (isLoading) {
-        return <div className="Page">Loading...</div>;
+        return <div className="flex justify-center items-center py-12 text-lg font-bold text-gray-500">Loading...</div>;
     }
 
     return (
-        <div className="Page">
+        <div className="flex justify-center w-full py-2">
             <div className="profile-card">
                 <ProfileHeader
-                   // firstName={profile.firstName}
-                    firstName="Karim"
-                    //lastName={profile.lastName}
-                    lastName="Ahmed"
-                    //email={profile.email}
-                    email="karim.ahmed@example.com"
+                    firstName={profile.firstName}
+                    lastName={profile.lastName}
+                    email={profile.email}
                 />
                 <div className="profile-body">
                     <ProfileForm

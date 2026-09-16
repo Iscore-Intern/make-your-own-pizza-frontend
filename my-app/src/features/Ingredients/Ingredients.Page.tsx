@@ -1,9 +1,9 @@
 import useIngredients from "./useIngredients";
 import CategoriesList from "./CategoriesList";
 import AddIngredientForm from "./AddIngredientForm";
-import Cheese from "../../assets/cheese.png"
-import BG from "../../../BG.jpg"
-export default function IngredientsManager(){
+import Cheese from "../../assets/cheese.png";
+
+export default function IngredientsManager() {
     const { 
         searchQuery, 
         setSearchQuery, 
@@ -13,17 +13,20 @@ export default function IngredientsManager(){
         categories,
         handleDelete
     } = useIngredients();
-    return(
-        < div className="w-full min-h-screen" style={{ backgroundImage: `url(${BG})` }}>
-            <div className="max-w-4xl mx-auto mt-24 flex flex-start flex-col">
-                <span className="text-lg font-semi-bold text-red-color tracking-widest">MANAGER</span>
-                <h1 className="text-3xl font-bold text-black-font tracking-widest ">
+
+    return (
+        <div className="max-w-4xl mx-auto flex flex-col gap-6">
+            <div className="flex flex-start flex-col">
+                <span className="text-sm font-bold text-red-color tracking-widest uppercase">
+                    MANAGER PORTAL
+                </span>
+                <h1 className="text-3xl font-extrabold text-black-font tracking-wide flex items-center gap-2">
                     Ingredients
-                    <img src={Cheese} className="w-10 h-10 inline-block ml-2"></img>
+                    <img src={Cheese} alt="Cheese" className="w-9 h-9 inline-block" />
                 </h1>
             </div>
-            <AddIngredientForm/>    
-            <div className="max-w-4xl mx-auto my-5 p-6 bg-white-color rounded-2xl  overflow-hidden border-r-8 border-b-8 border-l-2 border-t-2 border-black-font">
+            <AddIngredientForm />    
+            <div className="p-6 bg-white-color rounded-2xl overflow-hidden border-r-8 border-b-8 border-l-2 border-t-2 border-black-font">
                 <CategoriesList 
                     categories={categories}
                     activeTab={activeTab}
@@ -35,5 +38,5 @@ export default function IngredientsManager(){
                 />
             </div>
         </div>
-    )
-}
+    );
+}

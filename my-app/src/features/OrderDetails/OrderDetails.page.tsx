@@ -8,7 +8,7 @@ export default function OrderDetailsPage() {
 
     if (isLoading) {
         return (
-            <div className="min-h-screen flex items-center justify-center p-4">
+            <div className="flex items-center justify-center py-12">
                 <div className="bg-white-color rounded-2xl border-2 border-black-font border-r-6 border-b-6 p-8 font-bold text-black-font text-lg">
                     Loading order details...
                 </div>
@@ -18,7 +18,7 @@ export default function OrderDetailsPage() {
 
     if (error || !order) {
         return (
-            <div className="min-h-screen flex items-center justify-center p-4">
+            <div className="flex items-center justify-center py-12">
                 <div className="bg-white-color rounded-2xl border-2 border-black-font border-r-6 border-b-6 p-8 font-bold text-black-font text-lg text-center flex flex-col gap-4">
                     <p className="text-red-color">{error || "Order not found"}</p>
                     <button

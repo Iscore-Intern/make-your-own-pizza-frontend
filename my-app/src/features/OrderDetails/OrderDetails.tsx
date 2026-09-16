@@ -11,7 +11,7 @@ export default function OrderDetails({order}:OrderDetailsProps){
         0: "Cash on Delivery",
     };  
     return(
-        <div className="max-w-3xl mx-auto mt-24 flex flex-col gap-4">
+        <div className="max-w-3xl mx-auto flex flex-col gap-4">
             <h2 className="text-xl font-bold text-red-color mb-2">Order Details</h2>
             <div>
             <h4 className="text-2xl font-bold text-black-font mb-6">Order #{order.orderId}</h4>
