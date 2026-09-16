@@ -7,6 +7,8 @@ export const logoutAPI = async (userId: string) => {
         },
     });
     localStorage.removeItem("token");
+    localStorage.removeItem("role");
+    localStorage.removeItem("userId");
     localStorage.removeItem("cart");
     return response.data;
 };

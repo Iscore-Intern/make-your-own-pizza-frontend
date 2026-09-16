@@ -20,11 +20,7 @@ export default function SignUpForm({ formik }: SignUpFormUIProps) {
                     <Field label="Password" type="password" name="password" value={formik.values.password} onChange={formik.handleChange} onBlur={formik.handleBlur} error={formik.errors.password as string} touched={formik.touched.password as boolean} readonly={false} />
                     <Field label="Confirm Password" type="password" name="confirmPassword" value={formik.values.confirmPassword} onChange={formik.handleChange} onBlur={formik.handleBlur} error={formik.errors.confirmPassword as string} touched={formik.touched.confirmPassword as boolean} readonly={false} />
                 </div>
-                {/* <div className="role-selector full-width">
-                    <button type="button" className={`role-btn ${formik.values.role === 2 ? 'active' : ''}`} onClick={() => formik.setFieldValue('role', 2)}>Customer</button>
-                    <button type="button" className={`role-btn ${formik.values.role === 0 ? 'active' : ''}`} onClick={() => formik.setFieldValue('role', 0)}>Delivery</button>
-                </div> */}
-                <div >
+                <div>
                     <Button type="submit" disabled={formik.isSubmitting}>
                         {formik.isSubmitting ? 'Submitting...' : 'Sign Up'}
                     </Button>

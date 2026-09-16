@@ -12,7 +12,9 @@ export default function ProtectedRoute({ allowedRoles }: ProtectedRouteProps) {
         return <Navigate to="/" replace />;
     }
     if (allowedRoles && (userRole === null || !allowedRoles.includes(userRole))) {
-        return <Navigate to="/unauthorized" replace />;
+        if (userRole === 0) return <Navigate to="/dashboard" replace />;
+        if (userRole === 1) return <Navigate to="/delivery" replace />;
+        return <Navigate to="/home" replace />;
     }
     return <Outlet />;
 }

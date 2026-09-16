@@ -5,6 +5,8 @@ export const deleteCurrentUserAccount = async () => {
     try {
         await axiosInstance.delete("/User/me");
         localStorage.removeItem("token");
+        localStorage.removeItem("role");
+        localStorage.removeItem("userId");
         localStorage.removeItem("cart");
         toast.success("Account deleted successfully.");
     } catch (error) {

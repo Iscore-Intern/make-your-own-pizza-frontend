@@ -10,11 +10,14 @@ interface UseSignUpFormProps {
 
 export const useSignUpForm = ({ onSignUpSuccess }: UseSignUpFormProps) => {
     const formik = useFormik({
-        initialValues: { firstName: '', lastName: '', email: '', password: '', confirmPassword: '', phone: '', role: 0 },
+        initialValues: { firstName: '', lastName: '', email: '', password: '', confirmPassword: '', phone: '', role: 2 },
         validationSchema: signUpSchema,
         onSubmit: async (values, { setSubmitting }) => {
             try {
-                await axiosInstance.post('/Auth/register', values);
+                await axiosInstance.post('/Auth/register', {
+                    ...values,
+                    role: 2, // role fixed as 2 (Customer)
+                });
                 onSignUpSuccess(values.email);
             } catch (error) {
                 if (axios.isAxiosError(error)) {
