@@ -8,5 +8,5 @@ interface OtpFormPageProps {
 
 export default function OtpFormPage({ email, onVerifySuccess }: OtpFormPageProps) {
     const otpLogic = useOtpForm({ email, onVerifySuccess });
-    return <OtpForm {...otpLogic} />;
+    return <OtpForm {...otpLogic} email={email} />;
 }
