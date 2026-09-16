@@ -11,6 +11,7 @@ import IngredientsManager from './features/Ingredients/Ingredients.Page';
 import ManagerOrderDetailsPage from './features/ManagerViewOrder/ManagerOrderDetails.Page';
 import HomePage from './features/Home/HomePage';
 import CartPage from './features/Cart/Cart.page';
+import CheckoutPage from './features/Checkout/Checkout.page';
 
 export default function App() {
     return (
@@ -19,6 +20,7 @@ export default function App() {
                 <Route path="/home" element={<HomePage />} />
                 <Route path="/builder" element={<HomePage />} />
                 <Route path="/cart" element={<CartPage />} />
+                <Route path="/checkout" element={<CheckoutPage />} />
                 <Route path="/delivery" element={<DeliveryHomePage />} />
                 <Route path="/delivery/:orderId" element={<DeliveryDetailsPage />} />
                 <Route path="/singleOrder" element={<OrderDetailsPage />} />

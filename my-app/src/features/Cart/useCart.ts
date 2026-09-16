@@ -1,9 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import CartItem from "@/Core/Interfaces/Cart/CartItem.Interface";
-import CheckoutPayload from "@/Core/Interfaces/Cart/CheckoutPayload.Interface";
 import { getCart } from "@/Core/APIs/Cart/getCart.API";
-import { checkoutOrder } from "@/Core/APIs/Cart/checkout.API";
 import toast from "react-hot-toast";
 
 const initialMockCart: CartItem[] = [
@@ -47,7 +45,7 @@ export default function useCart() {
     const [specialRequest, setSpecialRequest] = useState<string>("");
     const [paymentMethod, setPaymentMethod] = useState<number>(0); // 0: Cash on Delivery, 1: Visa
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+    const isSubmitting = false;
 
     // Sync items to localStorage whenever they change
     useEffect(() => {
@@ -114,34 +112,13 @@ export default function useCart() {
         toast("Cart cleared", { icon: "🗑️" });
     };
 
-    // Checkout handler
-    const handleCheckout = async () => {
+    // Checkout handler - navigate to dedicated Checkout page
+    const handleCheckout = () => {
         if (items.length === 0) {
             toast.error("Your cart is empty!");
             return;
         }
-
-        setIsSubmitting(true);
-        const payload: CheckoutPayload = {
-            items,
-            specialRequest: specialRequest.trim() || undefined,
-            paymentMethod,
-            totalPrice: total,
-        };
-
-        try {
-            await checkoutOrder(payload);
-            toast.success("Order placed successfully! 🎉");
-            clearCart();
-            navigate("/orders");
-        } catch (error) {
-            console.warn("Backend checkout API error, falling back to local success:", error);
-            toast.success("Order placed successfully! 🎉 (Mock confirmation)");
-            clearCart();
-            navigate("/orders");
-        } finally {
-            setIsSubmitting(false);
-        }
+        navigate("/checkout");
     };
 
     return {
