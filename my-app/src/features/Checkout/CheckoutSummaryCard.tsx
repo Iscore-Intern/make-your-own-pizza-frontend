@@ -87,12 +87,6 @@ export default function CheckoutSummaryCard({
                         ← Back to Cart
                     </button>
                 </div>
-
-                {/* Assurance Guarantee */}
-                <div className="mt-2 p-3 rounded-xl bg-beige-color border border-black-font/15 flex items-center gap-2.5 text-xs text-sub-color font-bold">
-                    <span className="text-base">⚡</span>
-                    <span>Guaranteed hot & fresh delivery straight to your door</span>
-                </div>
             </div>
         </div>
     );
