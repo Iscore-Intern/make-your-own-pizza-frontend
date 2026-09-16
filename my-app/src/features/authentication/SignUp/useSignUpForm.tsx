@@ -10,7 +10,7 @@ interface UseSignUpFormProps {
 
 export const useSignUpForm = ({ onSignUpSuccess }: UseSignUpFormProps) => {
     const formik = useFormik({
-        initialValues: { firstName: '', lastName: '', email: '', password: '', confirmPassword: '', phone: '', role: 2 },
+        initialValues: { firstName: '', lastName: '', email: '', password: '', confirmPassword: '', phone: '', role: 0 },
         validationSchema: signUpSchema,
         onSubmit: async (values, { setSubmitting }) => {
             try {

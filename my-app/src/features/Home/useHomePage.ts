@@ -13,62 +13,23 @@ export const SIZE_OPTIONS: SizeOption[] = [
 
 export const CATEGORIES = ["All", "Meats", "Veggies", "Cheese"];
 
-// Fallback mock ingredients matching the existing Ingredients module
-const mockIngredients: ingredientItem[] = [
-    {
-        id: "1",
-        name: "Pepperoni",
-        price: 20,
-        colorHex: "#B22222",
-        isAvailable: true,
-        category: "Meats",
-    },
-    {
-        id: "2",
-        name: "Italian Sausage",
-        price: 22,
-        colorHex: "#8B4513",
-        isAvailable: true,
-        category: "Meats",
-    },
-    {
-        id: "3",
-        name: "Mushroom",
-        price: 15,
-        colorHex: "#A0522D",
-        isAvailable: true,
-        category: "Veggies",
-    },
-    {
-        id: "4",
-        name: "Black Olives",
-        price: 12,
-        colorHex: "#000000",
-        isAvailable: true,
-        category: "Veggies",
-    },
-    {
-        id: "5",
-        name: "Fresh Basil",
-        price: 10,
-        colorHex: "#228B22",
-        isAvailable: true,
-        category: "Veggies",
-    },
-    {
-        id: "6",
-        name: "Extra Mozzarella",
-        price: 18,
-        colorHex: "#FFA500",
-        isAvailable: true,
-        category: "Cheese",
-    },
-];
+const CATEGORY_NAMES: Record<number, string> = {
+    0: "Meats",
+    1: "Veggies",
+    2: "Cheese",
+};
+
+const normalizeCategory = (cat: unknown): string => {
+    if (typeof cat === "number" && CATEGORY_NAMES[cat]) {
+        return CATEGORY_NAMES[cat];
+    }
+    return String(cat || "Other");
+};
 
 export default function useHomePage() {
-    const [ingredients, setIngredients] = useState<ingredientItem[]>(mockIngredients);
+    const [ingredients, setIngredients] = useState<ingredientItem[]>([]);
     const [selectedSize, setSelectedSize] = useState<PizzaSize>("Medium");
-    const [selectedIngredientIds, setSelectedIngredientIds] = useState<string[]>(["1", "5"]); // Default to Pepperoni & Basil for preview
+    const [selectedIngredientIds, setSelectedIngredientIds] = useState<string[]>([]);
     const [activeCategory, setActiveCategory] = useState<string>("All");
     const [searchQuery, setSearchQuery] = useState<string>("");
     const [quantity, setQuantity] = useState<number>(1);
@@ -89,13 +50,16 @@ export default function useHomePage() {
         setIsLoading(true);
         GetIngredients()
             .then((data) => {
-                if (data && data.length > 0) {
-                    setIngredients(data);
+                if (Array.isArray(data)) {
+                    const normalized = data.map((item) => ({
+                        ...item,
+                        category: normalizeCategory(item.category),
+                    }));
+                    setIngredients(normalized);
                 }
             })
             .catch((error) => {
-                console.warn("Backend Ingredients API not reachable, using local ingredients:", error);
-                // Keep local mock ingredients
+                console.error("Failed to load ingredients from backend:", error);
             })
             .finally(() => {
                 setIsLoading(false);

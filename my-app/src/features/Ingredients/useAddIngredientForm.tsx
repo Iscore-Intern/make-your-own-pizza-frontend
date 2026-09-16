@@ -1,6 +1,14 @@
 import { useFormik } from "formik";
 import { SendIngredient } from "@/Core/APIs/Ingredients/SendIngredient.API";
 
+import toast from "react-hot-toast";
+
+const CATEGORY_MAP: Record<string, number> = {
+    Meats: 0,
+    Veggies: 1,
+    Cheese: 2,
+};
+
 export const useAddingIngredientForm = () => {
     const formik = useFormik({
         initialValues: {
@@ -10,26 +18,27 @@ export const useAddingIngredientForm = () => {
             colorHex: "#E85D4A",
             isAvailable: true,
         },
-        onSubmit: async(values,{resetForm, setSubmitting}) => {
-            try{
-                const newIngredient = await SendIngredient({
-                    name : values.name,
-                    category : values.category,
-                    price:Number(values.price),
-                    colorHex:values.colorHex,
-                    isAvailable:values.isAvailable
+        onSubmit: async (values, { resetForm, setSubmitting }) => {
+            try {
+                const categoryValue = CATEGORY_MAP[values.category] ?? 0;
+                await SendIngredient({
+                    name: values.name,
+                    category: categoryValue,
+                    price: Number(values.price),
+                    colorHex: values.colorHex,
                 });
-                window.location.reload();
-                console.log("Successfully created:", newIngredient);
+                toast.success("Ingredient created successfully! 🎉");
                 resetForm();
-            }
-            catch(error){
+                setTimeout(() => {
+                    window.location.reload();
+                }, 800);
+            } catch (error) {
                 console.error("Error creating ingredient:", error);
-            }
-            finally {
+                toast.error("Failed to create ingredient. Please try again.");
+            } finally {
                 setSubmitting(false);
             }
-        }
-    })
+        },
+    });
     return { formik };
 };

@@ -4,29 +4,10 @@ import CartItem from "@/Core/Interfaces/Cart/CartItem.Interface";
 import { getCart } from "@/Core/APIs/Cart/getCart.API";
 import toast from "react-hot-toast";
 
-const initialMockCart: CartItem[] = [
-    {
-        id: "cart-1",
-        name: "Custom Pizza",
-        size: "Medium",
-        description: "Pepperoni, Fresh Basil, Extra Mozzarella",
-        price: 208,
-        quantity: 2,
-    },
-    {
-        id: "cart-2",
-        name: "Margherita (Large)",
-        size: "Large",
-        description: "Mozzarella, Fresh Basil",
-        price: 195,
-        quantity: 1,
-    },
-];
-
 export default function useCart() {
     const navigate = useNavigate();
 
-    // Initialize items from localStorage or fallback to mock
+    // Initialize items from localStorage or empty
     const [items, setItems] = useState<CartItem[]>(() => {
         try {
             const raw = localStorage.getItem("cart");
@@ -39,7 +20,7 @@ export default function useCart() {
         } catch {
             // Ignore parse errors
         }
-        return initialMockCart;
+        return [];
     });
 
     const [isLoading, setIsLoading] = useState<boolean>(false);

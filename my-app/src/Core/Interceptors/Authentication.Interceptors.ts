@@ -12,6 +12,13 @@ axiosInstance.interceptors.request.use(
         if (token && config.headers) {
             config.headers.Authorization = `Bearer ${token}`;
         }
+        // Normalize URL to prevent duplicate /api/ or missing leading slashes
+        if (config.url) {
+            config.url = config.url.replace(/^(\/)?api\//i, '/');
+            if (!config.url.startsWith('/') && !config.url.startsWith('http')) {
+                config.url = `/${config.url}`;
+            }
+        }
         return config;
     },
     (error) => {

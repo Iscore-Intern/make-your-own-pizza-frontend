@@ -7,19 +7,19 @@ import FetchUserProfile from "@/Core/APIs/Profile/FetchUserProfile.API";
 import { checkoutOrder } from "@/Core/APIs/Cart/checkout.API";
 import toast from "react-hot-toast";
 
-const defaultContact: CustomerContact = {
-    name: "Karim Ahmed",
-    phone: "+20 100 123 4567",
-    email: "karim.ahmed@example.com",
+const initialContact: CustomerContact = {
+    name: "",
+    phone: "",
+    email: "",
 };
 
-const defaultAddress: AddressValues = {
-    city: "Cairo",
-    street: "Tahrir St",
-    district: "Downtown",
-    building_no: "12",
-    floor_no: "3",
-    apt_no: "15",
+const initialAddress: AddressValues = {
+    city: "",
+    street: "",
+    district: "",
+    building_no: "",
+    floor_no: "",
+    apt_no: "",
 };
 
 export default function useCheckout() {
@@ -39,8 +39,8 @@ export default function useCheckout() {
         return [];
     });
 
-    const [customerContact, setCustomerContact] = useState<CustomerContact>(defaultContact);
-    const [deliveryAddress, setDeliveryAddress] = useState<AddressValues>(defaultAddress);
+    const [customerContact, setCustomerContact] = useState<CustomerContact>(initialContact);
+    const [deliveryAddress, setDeliveryAddress] = useState<AddressValues>(initialAddress);
     const [isEditingAddress, setIsEditingAddress] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -52,28 +52,28 @@ export default function useCheckout() {
             .then((userData) => {
                 if (userData) {
                     const fullName = `${userData.firstName || ""} ${userData.lastName || ""}`.trim();
-                    if (fullName || userData.phone) {
-                        setCustomerContact({
-                            name: fullName || defaultContact.name,
-                            phone: userData.phone || defaultContact.phone,
-                            email: userData.email || defaultContact.email,
-                        });
-                    }
+                    setCustomerContact((prev) => ({
+                        ...prev,
+                        name: fullName || prev.name,
+                        phone: userData.phone || prev.phone,
+                        email: userData.email || prev.email,
+                    }));
 
                     if (userData.city || userData.street) {
-                        setDeliveryAddress({
-                            city: userData.city || defaultAddress.city,
-                            street: userData.street || defaultAddress.street,
-                            district: userData.district || defaultAddress.district,
-                            building_no: userData.building_no || defaultAddress.building_no,
-                            floor_no: userData.floor_no || defaultAddress.floor_no,
-                            apt_no: userData.apt_no || defaultAddress.apt_no,
-                        });
+                        setDeliveryAddress((prev) => ({
+                            ...prev,
+                            city: userData.city || prev.city,
+                            street: userData.street || prev.street,
+                            district: userData.district || prev.district,
+                            building_no: userData.building_no || prev.building_no,
+                            floor_no: userData.floor_no || prev.floor_no,
+                            apt_no: userData.apt_no || prev.apt_no,
+                        }));
                     }
                 }
             })
             .catch((error) => {
-                console.warn("Backend user profile API not reachable, using default checkout info:", error);
+                console.error("Failed to load user profile:", error);
             })
             .finally(() => {
                 setIsLoading(false);
@@ -157,7 +157,7 @@ export default function useCheckout() {
                 ...deliveryAddress,
                 formatted: formattedAddress,
             },
-            paymentMethod: 0, // 0: Cash on Delivery
+            paymentMethod: 1, // 1: Cash on Delivery per backend specification
             totalPrice: total,
         };
 
@@ -167,10 +167,8 @@ export default function useCheckout() {
             localStorage.removeItem("cart");
             navigate("/orders");
         } catch (error) {
-            console.warn("Backend checkout API error, proceeding with mock order completion:", error);
-            toast.success("Order placed successfully! 🎉 (Mock confirmation)");
-            localStorage.removeItem("cart");
-            navigate("/orders");
+            console.error("Backend checkout API error:", error);
+            toast.error("Failed to place order. Please verify your details and try again.");
         } finally {
             setIsSubmitting(false);
         }

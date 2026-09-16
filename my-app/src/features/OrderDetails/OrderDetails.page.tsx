@@ -1,41 +1,39 @@
-// import { useOrderDetails } from "./useOrderDetails";
+import { useOrderDetails } from "./useOrderDetails";
 import OrderDetails from "./OrderDetails";
-import { OrderDetailsData } from "./orderinfo";
+import { useNavigate } from "react-router-dom";
 
 export default function OrderDetailsPage() {
-    // const { order, isLoading, error } = useOrderDetails();
-    const mockOrder: OrderDetailsData = {
-        orderId: "100",
-        totalPrice: 190,
-        paymentMethod: 0,
-        customerPhone: "01008052461",
-        status: "Delivered",
-        createdAt: "2026-08-04T13:10:00+00:00",
-        pizzas: [
-            {
-                pizzaId: "1111",
-                pizzaName: "Custom Pizza",
-                price: 190,
-                ingredients: [
-                    { ingredientId: "1", ingredientName: "Extra Cheese", quantity: 1 },
-                    { ingredientId: "2", ingredientName: "Black Olives", quantity: 1 }
-                ]
-            }
-        ]
-    };
-    // if (isLoading) {
-    //     return <p className="text-center text-gray-500 mt-40 font-bold">Loading order details...</p>;
-    // }
+    const { order, isLoading, error } = useOrderDetails();
+    const navigate = useNavigate();
 
-    // if (error) {
-    //     return <p className="text-center text-red-500 mt-40 font-bold">{error}</p>;
-    // }
+    if (isLoading) {
+        return (
+            <div className="min-h-screen flex items-center justify-center p-4">
+                <div className="bg-white-color rounded-2xl border-2 border-black-font border-r-6 border-b-6 p-8 font-bold text-black-font text-lg">
+                    Loading order details...
+                </div>
+            </div>
+        );
+    }
 
-    // if (!order) {
-    //     return <p className="text-center text-gray-500 mt-40 font-bold">Order not found</p>;
-    // }
+    if (error || !order) {
+        return (
+            <div className="min-h-screen flex items-center justify-center p-4">
+                <div className="bg-white-color rounded-2xl border-2 border-black-font border-r-6 border-b-6 p-8 font-bold text-black-font text-lg text-center flex flex-col gap-4">
+                    <p className="text-red-color">{error || "Order not found"}</p>
+                    <button
+                        type="button"
+                        onClick={() => navigate("/orders")}
+                        className="px-4 py-2 bg-red-color text-white-color font-bold rounded-xl border-2 border-black-font hover:opacity-90"
+                    >
+                        Back to Orders
+                    </button>
+                </div>
+            </div>
+        );
+    }
 
     return (
-        <OrderDetails order={mockOrder} />
+        <OrderDetails order={order} />
     );
 }

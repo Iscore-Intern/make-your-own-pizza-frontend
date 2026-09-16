@@ -14,8 +14,8 @@ export const useOrderDetails=()=>{
         const fetchOrder=async()=>{
             if (!id) return;
             setIsLoading(true);
-            try{
-                const response=await axiosInstance.get(`api/Orders/${id}`);
+            try {
+                const response = await axiosInstance.get<OrderDetailsData>(`/Order/${id}`);
                 setOrder(response.data);
             }
             catch(error){
