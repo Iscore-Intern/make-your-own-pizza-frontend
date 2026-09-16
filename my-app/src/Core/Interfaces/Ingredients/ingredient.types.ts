@@ -1,4 +1,4 @@
-export interface ingredientItem{
+export interface Ingredient {
     id: string;
     name: string;
     price: number;
@@ -6,3 +6,16 @@ export interface ingredientItem{
     isAvailable: boolean; 
     category: string;
 }
+
+export interface Pizza {
+    id: string;
+    name: string;
+    price: number;
+}
+
+export interface MenuResponse {
+    ingredients: Ingredient[];
+    pizzas: Pizza[];
+}
+
+export type ingredientItem = Ingredient;

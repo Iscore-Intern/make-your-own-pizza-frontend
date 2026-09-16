@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { ingredientItem } from "@/Core/Interfaces/Ingredients/ingredient.types";
+import { Ingredient, Pizza } from "@/Core/Interfaces/Ingredients/ingredient.types";
 import { GetIngredients } from "@/Core/APIs/Ingredients/GetIngredients.API";
 import { PizzaSize, SizeOption, CustomPizzaConfig } from "@/Core/Interfaces/Home/PizzaCustomization.Interface";
 import { CartItem } from "@/Core/Interfaces/Cart/CartItem.Interface";
@@ -23,11 +23,19 @@ const normalizeCategory = (cat: unknown): string => {
     if (typeof cat === "number" && CATEGORY_NAMES[cat]) {
         return CATEGORY_NAMES[cat];
     }
+    if (typeof cat === "string") {
+        const lower = cat.toLowerCase();
+        if (lower.includes("meat")) return "Meats";
+        if (lower.includes("veg")) return "Veggies";
+        if (lower.includes("cheese")) return "Cheese";
+        return cat;
+    }
     return String(cat || "Other");
 };
 
 export default function useHomePage() {
-    const [ingredients, setIngredients] = useState<ingredientItem[]>([]);
+    const [ingredients, setIngredients] = useState<Ingredient[]>([]);
+    const [pizzas, setPizzas] = useState<Pizza[]>([]);
     const [selectedSize, setSelectedSize] = useState<PizzaSize>("Medium");
     const [selectedIngredientIds, setSelectedIngredientIds] = useState<string[]>([]);
     const [activeCategory, setActiveCategory] = useState<string>("All");
@@ -50,16 +58,20 @@ export default function useHomePage() {
         setIsLoading(true);
         GetIngredients()
             .then((data) => {
-                if (Array.isArray(data)) {
-                    const normalized = data.map((item) => ({
+                if (data && data.ingredients) {
+                    const normalized = data.ingredients.map((item) => ({
                         ...item,
                         category: normalizeCategory(item.category),
                     }));
                     setIngredients(normalized);
                 }
+                if (data && data.pizzas) {
+                    setPizzas(data.pizzas);
+                }
             })
             .catch((error) => {
-                console.error("Failed to load ingredients from backend:", error);
+                console.error("Failed to load menu ingredients from backend:", error);
+                toast.error("Failed to load ingredients from server");
             })
             .finally(() => {
                 setIsLoading(false);
@@ -158,7 +170,15 @@ export default function useHomePage() {
             localStorage.setItem("cart", JSON.stringify(items));
             const newCount = items.reduce((sum, item) => sum + (item.quantity || 1), 0);
             setCartCount(newCount);
+
+            // Instantly notify navbar & other components in the same tab
+            window.dispatchEvent(new Event("storage"));
+            window.dispatchEvent(new Event("cartUpdate"));
+
             toast.success(`Added ${quantity}x Custom ${selectedSize} Pizza to Cart! 🛒`);
+
+            // Reset pizza builder back to initial state
+            resetPizza();
         } catch {
             toast.error("Failed to add pizza to cart");
         }
@@ -175,6 +195,7 @@ export default function useHomePage() {
 
     return {
         ingredients,
+        pizzas,
         filteredIngredients,
         selectedIngredients,
         selectedIngredientIds,

@@ -6,6 +6,7 @@ import AddressValues from "@/Core/Interfaces/Address/AddressValues.Interface";
 import FetchUserProfile from "@/Core/APIs/Profile/FetchUserProfile.API";
 import { checkoutOrder } from "@/Core/APIs/Cart/checkout.API";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 const initialContact: CustomerContact = {
     name: "",
@@ -44,6 +45,7 @@ export default function useCheckout() {
     const [isEditingAddress, setIsEditingAddress] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
     // Fetch user profile from /User/me on load
     useEffect(() => {
@@ -150,6 +152,7 @@ export default function useCheckout() {
         }
 
         setIsSubmitting(true);
+        setErrorMessage(null);
         const payload: CheckoutPayload = {
             items,
             customer: customerContact,
@@ -162,13 +165,30 @@ export default function useCheckout() {
         };
 
         try {
-            await checkoutOrder(payload);
+            const result = await checkoutOrder(payload);
             toast.success("Order placed successfully! 🎉");
             localStorage.removeItem("cart");
-            navigate("/orders");
+            window.dispatchEvent(new Event("storage"));
+            window.dispatchEvent(new Event("cartUpdate"));
+            if (result && result.orderId) {
+                navigate(`/singleOrder/${result.orderId}`);
+            } else {
+                navigate("/orders");
+            }
         } catch (error) {
             console.error("Backend checkout API error:", error);
-            toast.error("Failed to place order. Please verify your details and try again.");
+            let message = "Failed to place order. Please verify your details and try again.";
+            if (axios.isAxiosError(error)) {
+                if (error.response?.data?.message) {
+                    message = error.response.data.message;
+                } else if (error.response?.data?.title) {
+                    message = error.response.data.title;
+                } else if (typeof error.response?.data === "string" && error.response.data.length < 150) {
+                    message = error.response.data;
+                }
+            }
+            setErrorMessage(message);
+            toast.error(message);
         } finally {
             setIsSubmitting(false);
         }
@@ -187,6 +207,7 @@ export default function useCheckout() {
         totalItemCount,
         isLoading,
         isSubmitting,
+        errorMessage,
         updateContactField,
         updateAddressField,
         handlePlaceOrder,

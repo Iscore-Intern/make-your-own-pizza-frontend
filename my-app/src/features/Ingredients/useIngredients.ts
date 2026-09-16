@@ -15,6 +15,13 @@ const normalizeCategory = (cat: unknown): string => {
     if (typeof cat === "number" && CATEGORY_NAMES[cat]) {
         return CATEGORY_NAMES[cat];
     }
+    if (typeof cat === "string") {
+        const lower = cat.toLowerCase();
+        if (lower.includes("meat")) return "Meats";
+        if (lower.includes("veg")) return "Veggies";
+        if (lower.includes("cheese")) return "Cheese";
+        return cat;
+    }
     return String(cat || "Other");
 };
 
@@ -27,13 +34,12 @@ export default function useIngredients() {
     useEffect(() => {
         GetIngredients()
             .then((data) => {
-                if (Array.isArray(data)) {
-                    const normalized = data.map((item) => ({
-                        ...item,
-                        category: normalizeCategory(item.category),
-                    }));
-                    setIngredients(normalized);
-                }
+                const list = data?.ingredients || (Array.isArray(data) ? data : []);
+                const normalized = list.map((item) => ({
+                    ...item,
+                    category: normalizeCategory(item.category),
+                }));
+                setIngredients(normalized);
                 setIsLoading(false);
             })
             .catch((error) => {

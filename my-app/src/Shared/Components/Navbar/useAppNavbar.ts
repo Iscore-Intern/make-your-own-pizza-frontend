@@ -49,11 +49,13 @@ export const useAppNavbar = () => {
         };
 
         window.addEventListener("storage", syncState);
+        window.addEventListener("cartUpdate", syncState);
         // Also poll briefly on navigation
         syncState();
 
         return () => {
             window.removeEventListener("storage", syncState);
+            window.removeEventListener("cartUpdate", syncState);
         };
     }, [location.pathname]);
 

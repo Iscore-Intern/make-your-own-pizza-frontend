@@ -30,6 +30,8 @@ export default function useCart() {
     useEffect(() => {
         try {
             localStorage.setItem("cart", JSON.stringify(items));
+            window.dispatchEvent(new Event("storage"));
+            window.dispatchEvent(new Event("cartUpdate"));
         } catch {
             // Storage quota or error
         }
@@ -88,6 +90,8 @@ export default function useCart() {
     const clearCart = () => {
         setItems([]);
         localStorage.removeItem("cart");
+        window.dispatchEvent(new Event("storage"));
+        window.dispatchEvent(new Event("cartUpdate"));
         toast("Cart cleared", { icon: "🗑️" });
     };
 

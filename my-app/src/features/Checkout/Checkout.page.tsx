@@ -20,6 +20,7 @@ export default function CheckoutPage() {
         total,
         totalItemCount,
         isSubmitting,
+        errorMessage,
         updateContactField,
         updateAddressField,
         handlePlaceOrder,
@@ -95,6 +96,7 @@ export default function CheckoutPage() {
                                 total={total}
                                 totalItemCount={totalItemCount}
                                 isSubmitting={isSubmitting}
+                                errorMessage={errorMessage}
                                 onPlaceOrder={handlePlaceOrder}
                             />
                         </aside>

@@ -14,10 +14,25 @@ import HomePage from './features/Home/HomePage';
 import CartPage from './features/Cart/Cart.page';
 import CheckoutPage from './features/Checkout/Checkout.page';
 import { RoleEnum } from './Core/Utils/auth.utils';
+import { Toaster } from 'react-hot-toast';
 
 export default function App() {
     return (
         <BrowserRouter>
+            <Toaster
+                position="top-center"
+                reverseOrder={false}
+                toastOptions={{
+                    style: {
+                        borderRadius: '16px',
+                        border: '2px solid #232c33',
+                        boxShadow: '4px 4px 0px 0px rgba(0,0,0,1)',
+                        fontWeight: 'bold',
+                        color: '#232c33',
+                        background: '#ffffff',
+                    },
+                }}
+            />
             <Routes>
                 {/* Public Authentication Route */}
                 <Route path="/" element={<AuthenticationPage />} />
